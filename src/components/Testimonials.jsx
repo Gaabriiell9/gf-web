@@ -180,18 +180,6 @@ export default function Testimonials() {
   useEffect(() => {
     console.log('[OAuth] mount — sessionStorage intent:', sessionStorage.getItem('oauth_redirect_intent'))
 
-    const init = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.user) {
-        setUser(session.user)
-        const { data: existing } = await supabase
-          .from('reviews').select('id').eq('user_id', session.user.id).single()
-        if (existing) setAlreadyReviewed(true)
-      }
-      setAuthReady(true)
-    }
-    init()
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
@@ -206,15 +194,16 @@ export default function Testimonials() {
         const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
         console.log('[OAuth]', event, '— oauthIntent:', oauthIntent, '| existing:', !!existing)
 
-        if (oauthIntent && !existing) {
+        if (oauthIntent) {
           sessionStorage.removeItem('oauth_redirect_intent')
-          setFormOpen(true)
-          window.location.hash = '#avis'
-          requestAnimationFrame(() => {
+          if (!existing) {
+            setFormOpen(true)
             requestAnimationFrame(() => {
-              document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              requestAnimationFrame(() => {
+                document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              })
             })
-          })
+          }
         }
 
         setAuthReady(true)
@@ -227,6 +216,7 @@ export default function Testimonials() {
       if (event === 'SIGNED_OUT') {
         setAlreadyReviewed(false)
         setFormOpen(false)
+        setAuthReady(true)
       }
     })
 
