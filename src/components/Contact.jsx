@@ -32,7 +32,7 @@ export default function Contact() {
 
   const submit = async (e) => {
     e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
+    if (!form.name || !form.email || !form.subject || !form.message) return
     setStatus('loading')
     try {
       const res = await fetch('/api/contact', {
@@ -66,8 +66,8 @@ export default function Contact() {
           <div className={styles.info}>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Email</span>
-              <a href="mailto:joaofarias20@icloud.com" className={styles.infoValue}>
-                joaofarias20@icloud.com
+              <a href="mailto:contact@gf-web.fr" className={styles.infoValue}>
+                contact@gf-web.fr
               </a>
             </div>
             <div className={styles.infoItem}>
@@ -134,6 +134,7 @@ export default function Contact() {
                   name="subject"
                   value={form.subject}
                   onChange={handle}
+                  required
                 >
                   <option value="">Sélectionner un sujet</option>
                   {SUBJECTS.map((s) => (

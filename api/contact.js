@@ -1,83 +1,220 @@
 // api/contact.js — Vercel Serverless Function
-// Envoie un email via Resend (https://resend.com) — API gratuite jusqu'à 3000 emails/mois
-// Variables d'environnement à configurer sur Vercel :
-//   RESEND_API_KEY  → ta clé API Resend
-//   CONTACT_EMAIL   → l'adresse qui reçoit les messages (ex: joaofarias20@icloud.com)
+// Envoie via Resend : notification interne + confirmation client
+// Variables d'env requises : RESEND_API_KEY
+
+const RECIPIENT = 'gfweb.pro@outlook.fr'
+const SENDER    = 'GF Web <contact@gf-web.fr>'
+
+function isValidEmail(str) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+// ── Templates ────────────────────────────────────────────────────────────────
+
+function notificationHtml({ name, email, subject, message }) {
+  const n = escapeHtml(name)
+  const e = escapeHtml(email)
+  const s = escapeHtml(subject)
+  const m = escapeHtml(message)
+
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080808;font-family:'DM Sans',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#080808;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:6px;overflow:hidden;">
+
+        <!-- Header -->
+        <tr>
+          <td style="padding:32px 40px 24px;border-bottom:1px solid #1e1e1e;">
+            <span style="font-family:monospace;font-size:20px;font-weight:800;color:#f0ede8;letter-spacing:-0.02em;">GF<span style="color:#c8f135;">.</span></span>
+            <span style="display:block;margin-top:12px;font-family:monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c8f135;">Nouveau message reçu</span>
+          </td>
+        </tr>
+
+        <!-- Infos -->
+        <tr>
+          <td style="padding:32px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:32px;">
+              <tr>
+                <td style="padding:12px 0;border-bottom:1px solid #1e1e1e;font-family:monospace;font-size:10px;color:#4a4a4a;text-transform:uppercase;letter-spacing:0.1em;width:110px;vertical-align:top;">Nom</td>
+                <td style="padding:12px 0;border-bottom:1px solid #1e1e1e;font-size:14px;color:#f0ede8;">${n}</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 0;border-bottom:1px solid #1e1e1e;font-family:monospace;font-size:10px;color:#4a4a4a;text-transform:uppercase;letter-spacing:0.1em;vertical-align:top;">Email</td>
+                <td style="padding:12px 0;border-bottom:1px solid #1e1e1e;font-size:14px;"><a href="mailto:${e}" style="color:#c8f135;text-decoration:none;">${e}</a></td>
+              </tr>
+              <tr>
+                <td style="padding:12px 0;font-family:monospace;font-size:10px;color:#4a4a4a;text-transform:uppercase;letter-spacing:0.1em;vertical-align:top;">Sujet</td>
+                <td style="padding:12px 0;font-size:14px;color:#f0ede8;">${s}</td>
+              </tr>
+            </table>
+
+            <!-- Message block -->
+            <div style="background:#080808;border:1px solid #1e1e1e;border-radius:4px;padding:24px;">
+              <p style="margin:0 0 14px;font-family:monospace;font-size:10px;color:#4a4a4a;letter-spacing:0.1em;text-transform:uppercase;">Message</p>
+              <p style="margin:0;font-size:14px;line-height:1.8;color:#a0a0a0;white-space:pre-wrap;">${m}</p>
+            </div>
+
+            <!-- CTA -->
+            <div style="margin-top:32px;">
+              <a href="mailto:${e}?subject=Re: ${s}" style="display:inline-block;background:#c8f135;color:#080808;font-family:monospace;font-size:12px;letter-spacing:0.06em;padding:13px 24px;border-radius:2px;text-decoration:none;font-weight:600;">Répondre à ${n}</a>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:20px 40px;border-top:1px solid #1e1e1e;font-family:monospace;font-size:10px;color:#4a4a4a;letter-spacing:0.04em;">
+            gf-web.fr — Email reçu depuis le formulaire de contact
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
+function confirmationHtml({ name }) {
+  const n = escapeHtml(name)
+
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080808;font-family:'DM Sans',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#080808;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:6px;overflow:hidden;">
+
+        <!-- Header -->
+        <tr>
+          <td style="padding:32px 40px 24px;border-bottom:1px solid #1e1e1e;">
+            <span style="font-family:monospace;font-size:20px;font-weight:800;color:#f0ede8;letter-spacing:-0.02em;">GF<span style="color:#c8f135;">.</span></span>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="padding:40px 40px 32px;">
+            <p style="margin:0 0 8px;font-family:monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c8f135;">Message reçu</p>
+            <h1 style="margin:0 0 24px;font-size:28px;font-weight:800;letter-spacing:-0.03em;color:#f0ede8;line-height:1.1;">Bonjour ${n},</h1>
+            <p style="margin:0 0 20px;font-size:15px;line-height:1.75;color:#a0a0a0;">
+              Merci pour votre message. Je l'ai bien reçu et vous répondrai dans les <strong style="color:#f0ede8;">24 heures</strong>.
+            </p>
+            <p style="margin:0 0 32px;font-size:15px;line-height:1.75;color:#a0a0a0;">
+              En attendant, n'hésitez pas à consulter mes services sur le site.
+            </p>
+
+            <a href="https://gf-web.fr" style="display:inline-block;background:#c8f135;color:#080808;font-family:monospace;font-size:12px;letter-spacing:0.06em;padding:13px 24px;border-radius:2px;text-decoration:none;font-weight:600;">Voir gf-web.fr</a>
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr>
+          <td style="padding:0 40px;">
+            <div style="height:1px;background:#1e1e1e;"></div>
+          </td>
+        </tr>
+
+        <!-- Signature -->
+        <tr>
+          <td style="padding:28px 40px 32px;">
+            <p style="margin:0 0 4px;font-size:14px;color:#f0ede8;font-weight:500;">Gabriel</p>
+            <p style="margin:0;font-family:monospace;font-size:11px;color:#4a4a4a;letter-spacing:0.04em;">GF Web — Développeur web freelance</p>
+            <p style="margin:6px 0 0;font-family:monospace;font-size:11px;"><a href="mailto:contact@gf-web.fr" style="color:#c8f135;text-decoration:none;">contact@gf-web.fr</a></p>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:16px 40px;border-top:1px solid #1e1e1e;font-family:monospace;font-size:10px;color:#4a4a4a;letter-spacing:0.04em;">
+            Vous recevez cet email car vous avez soumis le formulaire de contact sur gf-web.fr.
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
+// ── Handler ───────────────────────────────────────────────────────────────────
+
+async function sendEmail(payload, apiKey) {
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Resend ${res.status}: ${body}`)
+  }
+
+  return res.json()
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, subject, message } = req.body
+  // ── Validation ──
+  const { name, email, subject, message } = req.body ?? {}
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Champs requis manquants' })
+  const errors = []
+  if (!name?.trim())            errors.push('name')
+  if (!email?.trim() || !isValidEmail(email)) errors.push('email')
+  if (!subject?.trim())         errors.push('subject')
+  if (!message?.trim())         errors.push('message')
+
+  if (errors.length) {
+    return res.status(400).json({ error: 'Champs invalides ou manquants', fields: errors })
   }
 
   const apiKey = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_EMAIL || 'joaofarias20@icloud.com'
-
   if (!apiKey) {
-    console.error('RESEND_API_KEY manquante')
+    console.error('[contact] RESEND_API_KEY manquante')
     return res.status(500).json({ error: 'Configuration serveur manquante' })
   }
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'GF Web Contact <contact@gf-web.fr>',
-        to: [to],
-        reply_to: email,
-        subject: `[GF Web] ${subject || 'Nouveau message'} — ${name}`,
-        html: `
-          <div style="font-family: 'DM Sans', sans-serif; max-width: 600px; margin: 0 auto; background: #0f0f0f; color: #f0ede8; padding: 40px; border-radius: 8px;">
-            <div style="border-bottom: 1px solid #1e1e1e; padding-bottom: 24px; margin-bottom: 24px;">
-              <span style="font-family: monospace; font-size: 11px; color: #c8f135; letter-spacing: 0.1em;">NOUVEAU MESSAGE — GF-WEB.FR</span>
-            </div>
-            
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
-              <tr>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-family: monospace; font-size: 11px; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.08em; width: 120px;">Nom</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-size: 14px;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-family: monospace; font-size: 11px; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.08em;">Email</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-size: 14px;"><a href="mailto:${email}" style="color: #c8f135;">${email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-family: monospace; font-size: 11px; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.08em;">Sujet</td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #1e1e1e; font-size: 14px;">${subject || 'Non précisé'}</td>
-              </tr>
-            </table>
+    // Email 1 — notification interne
+    await sendEmail({
+      from: SENDER,
+      to: [RECIPIENT],
+      reply_to: email.trim(),
+      subject: `[GF Web] ${subject.trim()} — ${name.trim()}`,
+      html: notificationHtml({ name: name.trim(), email: email.trim(), subject: subject.trim(), message: message.trim() }),
+    }, apiKey)
 
-            <div style="background: #080808; border: 1px solid #1e1e1e; border-radius: 4px; padding: 24px;">
-              <p style="font-family: monospace; font-size: 10px; color: #4a4a4a; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px;">Message</p>
-              <p style="font-size: 14px; line-height: 1.75; color: #a0a0a0; margin: 0; white-space: pre-wrap;">${message}</p>
-            </div>
-
-            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #1e1e1e;">
-              <a href="mailto:${email}" style="display: inline-block; background: #c8f135; color: #080808; font-family: monospace; font-size: 12px; letter-spacing: 0.06em; padding: 12px 24px; border-radius: 2px; text-decoration: none;">Répondre à ${name}</a>
-            </div>
-          </div>
-        `,
-      }),
-    })
-
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('Resend error:', err)
-      return res.status(500).json({ error: 'Échec envoi email' })
-    }
+    // Email 2 — confirmation au client
+    await sendEmail({
+      from: SENDER,
+      to: [email.trim()],
+      subject: 'Votre message a bien été reçu — GF Web',
+      html: confirmationHtml({ name: name.trim() }),
+    }, apiKey)
 
     return res.status(200).json({ success: true })
-  } catch (error) {
-    console.error('Contact API error:', error)
-    return res.status(500).json({ error: 'Erreur serveur' })
+  } catch (err) {
+    console.error('[contact] Erreur envoi:', err.message)
+    return res.status(500).json({ error: 'Échec de l\'envoi. Réessayez ou contactez-moi directement.' })
   }
 }
