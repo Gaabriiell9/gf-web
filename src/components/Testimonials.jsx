@@ -196,22 +196,15 @@ export default function Testimonials() {
       console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
 
-      // Initialise l'état pour toute session existante (page load normal)
-      if (event === 'INITIAL_SESSION' && session?.user) {
-        const { data: existing } = await supabase
-          .from('reviews').select('id').eq('user_id', session.user.id).single()
-        setAlreadyReviewed(!!existing)
-      }
-
-      // SIGNED_IN = retour OAuth ou connexion fraîche
-      // sessionStorage est le seul gate — présent uniquement si on vient de signInWithGoogle
-      if (event === 'SIGNED_IN' && session?.user) {
+      // INITIAL_SESSION (échange PKCE rapide) ou SIGNED_IN (échange lent) :
+      // même logique — sessionStorage est le seul gate pour le scroll
+      if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN') && session?.user) {
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         setAlreadyReviewed(!!existing)
 
         const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
-        console.log('[OAuth] SIGNED_IN — oauthIntent:', oauthIntent, '| existing:', !!existing)
+        console.log('[OAuth]', event, '— oauthIntent:', oauthIntent, '| existing:', !!existing)
 
         if (oauthIntent && !existing) {
           sessionStorage.removeItem('oauth_redirect_intent')
