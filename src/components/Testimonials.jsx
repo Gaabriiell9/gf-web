@@ -179,17 +179,10 @@ export default function Testimonials() {
   }, [])
 
   useEffect(() => {
-    // Détecte un retour OAuth PKCE (?code= dans l'URL)
-    const isPkceReturn = window.location.search.includes('code=')
-    console.log('[OAuth] mount — isPkceReturn:', isPkceReturn)
     console.log('[OAuth] mount — sessionStorage intent:', sessionStorage.getItem('oauth_redirect_intent'))
 
-    // init() : récupère la session existante pour initialiser l'état UI.
-    // Ne gère pas le scroll — c'est onAuthStateChange qui s'en charge.
     const init = async () => {
-      console.log('[OAuth] init() — getSession()...')
       const { data: { session } } = await supabase.auth.getSession()
-      console.log('[OAuth] init() — session:', session?.user?.email ?? 'null')
       if (session?.user) {
         setUser(session.user)
         const { data: existing } = await supabase
@@ -200,29 +193,32 @@ export default function Testimonials() {
     init()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null', '| isPkceReturn:', isPkceReturn)
+      console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
 
-      // Couvre les deux cas PKCE :
-      // - échange rapide  → INITIAL_SESSION arrive avec user, SIGNED_IN peut ne jamais firer
-      // - échange lent    → INITIAL_SESSION arrive sans user, SIGNED_IN arrive après l'échange
-      const isAuthEvent = event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && isPkceReturn)
+      // Initialise l'état pour toute session existante (page load normal)
+      if (event === 'INITIAL_SESSION' && session?.user) {
+        const { data: existing } = await supabase
+          .from('reviews').select('id').eq('user_id', session.user.id).single()
+        setAlreadyReviewed(!!existing)
+      }
 
-      if (isAuthEvent && session?.user) {
+      // SIGNED_IN = retour OAuth ou connexion fraîche
+      // sessionStorage est le seul gate — présent uniquement si on vient de signInWithGoogle
+      if (event === 'SIGNED_IN' && session?.user) {
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         setAlreadyReviewed(!!existing)
 
-        // sessionStorage est le gate unique — le premier event qui le lit scroll et le nettoie
         const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
-        console.log('[OAuth]', event, '— oauthIntent:', oauthIntent, '| existing:', !!existing)
+        console.log('[OAuth] SIGNED_IN — oauthIntent:', oauthIntent, '| existing:', !!existing)
 
         if (oauthIntent && !existing) {
           sessionStorage.removeItem('oauth_redirect_intent')
           setFormOpen(true)
           setTimeout(() => {
             const el = document.getElementById('avis')
-            console.log('[OAuth]', event, '— element #avis:', el)
+            console.log('[OAuth] scroll — element #avis:', el)
             window.location.hash = '#avis'
             if (el) {
               window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
