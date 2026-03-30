@@ -179,52 +179,55 @@ export default function Testimonials() {
   }, [])
 
   useEffect(() => {
+    // Détecte un retour OAuth PKCE (?code= dans l'URL)
+    const isPkceReturn = window.location.search.includes('code=')
+    console.log('[OAuth] mount — isPkceReturn:', isPkceReturn)
+    console.log('[OAuth] mount — sessionStorage intent:', sessionStorage.getItem('oauth_redirect_intent'))
+
+    // init() : récupère la session existante pour initialiser l'état UI.
+    // Ne gère pas le scroll — c'est onAuthStateChange qui s'en charge.
     const init = async () => {
-      console.log('[OAuth] init() — appel getSession()...')
+      console.log('[OAuth] init() — getSession()...')
       const { data: { session } } = await supabase.auth.getSession()
       console.log('[OAuth] init() — session:', session?.user?.email ?? 'null')
-
       if (session?.user) {
         setUser(session.user)
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         if (existing) setAlreadyReviewed(true)
-
-        const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
-        console.log('[OAuth] init() — oauthIntent:', oauthIntent)
-
-        if (oauthIntent) {
-          sessionStorage.removeItem('oauth_redirect_intent')
-          console.log('[OAuth] init() — intent nettoyé')
-          if (!existing) {
-            setFormOpen(true)
-            setTimeout(() => {
-              console.log('[OAuth] init() — scroll vers #' + oauthIntent)
-              window.location.hash = '#' + oauthIntent
-              document.getElementById(oauthIntent)?.scrollIntoView({ behavior: 'smooth' })
-            }, 800)
-          }
-        }
       }
     }
     init()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('[OAuth] onAuthStateChange —', event, session?.user?.email ?? 'null')
+      console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null', '| isPkceReturn:', isPkceReturn)
       setUser(session?.user ?? null)
-      if (event === 'SIGNED_IN' && session?.user) {
+
+      // Couvre les deux cas PKCE :
+      // - échange rapide  → INITIAL_SESSION arrive avec user, SIGNED_IN peut ne jamais firer
+      // - échange lent    → INITIAL_SESSION arrive sans user, SIGNED_IN arrive après l'échange
+      const isAuthEvent = event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && isPkceReturn)
+
+      if (isAuthEvent && session?.user) {
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         setAlreadyReviewed(!!existing)
-        if (!existing) {
+
+        // sessionStorage est le gate unique — le premier event qui le lit scroll et le nettoie
+        const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
+        console.log('[OAuth]', event, '— oauthIntent:', oauthIntent, '| existing:', !!existing)
+
+        if (oauthIntent && !existing) {
+          sessionStorage.removeItem('oauth_redirect_intent')
           setFormOpen(true)
           setTimeout(() => {
-            console.log('[OAuth] onAuthStateChange — scroll vers #avis')
+            console.log('[OAuth]', event, '— scroll vers #avis')
             window.location.hash = '#avis'
             document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth' })
           }, 800)
         }
       }
+
       if (event === 'SIGNED_OUT') {
         setAlreadyReviewed(false)
         setFormOpen(false)
