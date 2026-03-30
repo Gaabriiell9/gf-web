@@ -1,0 +1,40 @@
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Hero from './components/Hero'
+import Services from './components/Services'
+import Portfolio from './components/Portfolio'
+import Testimonials from './components/Testimonials'
+import Pricing from './components/Pricing'
+import Faq from './components/Faq'
+import Contact from './components/Contact'
+import About from './pages/About'
+import Legal from './pages/Legal'
+import RepairPage from './pages/RepairPage'
+import BuildPage from './pages/BuildPage'
+
+export default function App() {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={
+          <main>
+            <Hero />
+            <Services />
+            <Portfolio />
+            <Testimonials />
+            <Pricing />
+            <Faq />
+            <Contact />
+          </main>
+        } />
+        <Route path="/about" element={<About />} />
+        <Route path="/mentions-legales" element={<Legal />} />
+        <Route path="/reparation-pc" element={<RepairPage />} />
+        <Route path="/montage-pc" element={<BuildPage />} />
+      </Routes>
+      <Footer />
+    </>
+  )
+}

@@ -1,0 +1,421 @@
+.page {
+  min-height: 100svh;
+  padding-top: 0;
+}
+
+/* ── Shared layout ── */
+.inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section {
+  padding: clamp(80px, 12vw, 160px) var(--pad);
+}
+
+.sectionAlt {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Hero ── */
+.heroSection {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 90px var(--pad) clamp(60px, 10vw, 100px);
+  overflow: hidden;
+}
+
+/* Animated code background */
+.codeBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 80px var(--pad);
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.6) 20%,
+    rgba(0,0,0,0.6) 80%,
+    transparent 100%
+  );
+  animation: scrollUp 28s linear infinite;
+}
+
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.codeLine {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(200, 241, 53, 0.07);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  display: block;
+}
+
+.backBtn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 0 0 40px;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  color: var(--accent);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--pad);
+}
+
+.heroHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 6.5vw, 88px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headlineMuted {
+  color: var(--text-dim);
+}
+
+.heroSub {
+  font-size: clamp(15px, 1.3vw, 17px);
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+/* ── Section titles ── */
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.introText {
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 680px;
+  margin-bottom: 56px;
+}
+
+/* ── Repair cards grid ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--surface);
+  padding: clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background 0.3s ease;
+}
+
+.card:hover {
+  background: var(--surface-2);
+}
+
+.cardNumber {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+
+/* ── Build profile cards ── */
+.buildsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.buildCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--build-accent, var(--accent));
+  border-radius: 2px;
+  padding: clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background 0.3s ease;
+}
+
+.buildCard:hover {
+  background: var(--surface-2);
+}
+
+.buildTitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--build-accent, var(--accent));
+}
+
+.buildDesc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
+  flex: 1;
+}
+
+.specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specPill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 2px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* ── Pricing table ── */
+.pricingTable {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.pricingHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 14px 24px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pricingRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 16px 24px;
+  align-items: center;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.pricingRow:last-child {
+  border-bottom: none;
+}
+
+.pricingRowAlt {
+  background: var(--surface);
+}
+
+.pricingLabel {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.pricingPrice {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.pricingNote {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── CTA section ── */
+.ctaSection {
+  padding: clamp(80px, 12vw, 160px) var(--pad);
+  border-top: 1px solid var(--border);
+}
+
+.ctaBlock {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.ctaSub {
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--text-dim);
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.ctaActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btnGhost {
+  font-size: 13px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.btnGhost:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .cardsGrid { grid-template-columns: repeat(2, 1fr); }
+  .buildsGrid { grid-template-columns: 1fr; max-width: 520px; }
+}
+
+@media (max-width: 768px) {
+  .heroHeadline { font-size: clamp(28px, 8vw, 44px); }
+  .cardsGrid { grid-template-columns: 1fr; }
+  .buildsGrid { grid-template-columns: 1fr; }
+  .pricingRow, .pricingHeader { grid-template-columns: 1fr; gap: 4px; }
+  .pricingPrice { color: var(--accent); font-size: 13px; }
+  .pricingLabel { font-size: 13px; }
+  .backBtn { padding-top: 80px; }
+}
+
+@media (max-width: 600px) {
+  .heroSection {
+    justify-content: flex-start;
+    min-height: 100svh;
+    height: auto;
+    padding-bottom: 48px;
+  }
+}

@@ -1,0 +1,428 @@
+.section {
+  padding: clamp(80px, 12vw, 160px) var(--pad);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+/* ── Reviews grid ── */
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.reviewCard {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.25s ease;
+}
+
+.reviewCard:hover {
+  border-color: rgba(200, 241, 53, 0.25);
+}
+
+/* ── Card internals ── */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid rgba(200, 241, 53, 0.3);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(200, 241, 53, 0.2);
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.cardRole {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.starFilled {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.starEmpty {
+  color: var(--border);
+  font-size: 13px;
+}
+
+.cardMessage {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  flex: 1;
+}
+
+.cardDate {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  margin-top: auto;
+}
+
+/* ── Empty state ── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 64px 32px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  font-size: 32px;
+  color: var(--accent);
+  opacity: 0.4;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 340px;
+}
+
+.emptyFormArea {
+  width: 100%;
+  text-align: left;
+}
+
+/* ── Skeleton ── */
+.skeleton {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+}
+
+.skeletonHeader {
+  width: 160px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--border);
+  animation: shimmer 1.5s ease infinite;
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 2px;
+  background: var(--border);
+  animation: shimmer 1.5s ease infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ── Auth / form area ── */
+.formArea {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.googleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  color: #1f1f1f;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 13px 24px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.googleBtn:hover {
+  opacity: 0.9;
+}
+
+.userBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.signOutBtn {
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: auto;
+}
+
+.signOutBtn:hover {
+  color: var(--text-dim);
+}
+
+/* ── Toggle button ── */
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  background: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.toggleBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Form ── */
+.formWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.formWrapper.open {
+  max-height: 800px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+  max-width: 600px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.field input,
+.field textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  padding: 13px 16px;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted);
+}
+
+/* ── Star input ── */
+.starInput {
+  display: flex;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.starBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--border);
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color 0.15s ease;
+  line-height: 1;
+}
+
+.starActive {
+  color: var(--accent);
+}
+
+/* ── Messages ── */
+.submitBtn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.2s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.successMsg {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  border: 1px solid rgba(200, 241, 53, 0.2);
+  padding: 16px 20px;
+  border-radius: 2px;
+}
+
+.errorMsg {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #e87a90;
+  letter-spacing: 0.04em;
+}
+
+.alreadyReviewed {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-top: 24px;
+  padding: 12px 20px;
+  border: 1px solid rgba(200, 241, 53, 0.2);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .reviewsGrid { grid-template-columns: 1fr; }
+  .title { font-size: clamp(28px, 8vw, 40px); }
+  .header { margin-bottom: 24px; }
+  .reviewCard { padding: 20px; }
+  .googleBtn { width: 100%; justify-content: center; }
+}
