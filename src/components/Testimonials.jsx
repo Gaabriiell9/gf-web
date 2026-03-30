@@ -221,10 +221,13 @@ export default function Testimonials() {
           sessionStorage.removeItem('oauth_redirect_intent')
           setFormOpen(true)
           setTimeout(() => {
-            console.log('[OAuth]', event, '— scroll vers #avis')
+            const el = document.getElementById('avis')
+            console.log('[OAuth]', event, '— element #avis:', el)
             window.location.hash = '#avis'
-            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth' })
-          }, 800)
+            if (el) {
+              window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
+            }
+          }, 1500)
         }
       }
 
