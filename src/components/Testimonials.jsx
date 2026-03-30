@@ -180,22 +180,27 @@ export default function Testimonials() {
 
   useEffect(() => {
     const init = async () => {
+      console.log('[OAuth] init() — appel getSession()...')
       const { data: { session } } = await supabase.auth.getSession()
+      console.log('[OAuth] init() — session:', session?.user?.email ?? 'null')
+
       if (session?.user) {
         setUser(session.user)
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         if (existing) setAlreadyReviewed(true)
 
-        // Détecte un retour OAuth (flux PKCE ou implicite) via sessionStorage.
-        // On ne peut pas se fier au hash (#access_token) car Supabase v2 utilise
-        // PKCE par défaut (code dans ?code=, pas dans le hash).
         const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
+        console.log('[OAuth] init() — oauthIntent:', oauthIntent)
+
         if (oauthIntent) {
           sessionStorage.removeItem('oauth_redirect_intent')
+          console.log('[OAuth] init() — intent nettoyé')
           if (!existing) {
             setFormOpen(true)
             setTimeout(() => {
+              console.log('[OAuth] init() — scroll vers #' + oauthIntent)
+              window.location.hash = '#' + oauthIntent
               document.getElementById(oauthIntent)?.scrollIntoView({ behavior: 'smooth' })
             }, 800)
           }
@@ -205,6 +210,7 @@ export default function Testimonials() {
     init()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('[OAuth] onAuthStateChange —', event, session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
       if (event === 'SIGNED_IN' && session?.user) {
         const { data: existing } = await supabase
@@ -213,8 +219,10 @@ export default function Testimonials() {
         if (!existing) {
           setFormOpen(true)
           setTimeout(() => {
-            document.getElementById('temoignages')?.scrollIntoView({ behavior: 'smooth' })
-          }, 400)
+            console.log('[OAuth] onAuthStateChange — scroll vers #avis')
+            window.location.hash = '#avis'
+            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth' })
+          }, 800)
         }
       }
       if (event === 'SIGNED_OUT') {
@@ -227,13 +235,11 @@ export default function Testimonials() {
   }, [])
 
   const signInWithGoogle = async () => {
-    // Mémorise l'intent de scroll avant la redirection OAuth.
-    // La session n'existe pas encore à ce stade, donc on ne peut pas
-    // détecter le retour via onAuthStateChange de façon fiable (race condition).
-    sessionStorage.setItem('oauth_redirect_intent', 'temoignages')
+    console.log('[OAuth] intent posé, redirection Google...')
+    sessionStorage.setItem('oauth_redirect_intent', 'avis')
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: window.location.origin + '/' },
+      options: { redirectTo: window.location.origin },
     })
   }
 
@@ -248,7 +254,7 @@ export default function Testimonials() {
     new Date(dateStr).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
 
   return (
-    <section className={styles.section} id="temoignages">
+    <section className={styles.section} id="avis">
       <div className={styles.inner}>
 
         {/* ── Header ── */}
