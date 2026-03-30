@@ -162,12 +162,17 @@ async function sendEmail(payload, apiKey) {
     body: JSON.stringify(payload),
   })
 
+  const responseText = await res.text()
+
   if (!res.ok) {
-    const body = await res.text()
-    throw new Error(`Resend ${res.status}: ${body}`)
+    throw new Error(`Resend HTTP ${res.status} — ${responseText}`)
   }
 
-  return res.json()
+  try {
+    return JSON.parse(responseText)
+  } catch {
+    return { raw: responseText }
+  }
 }
 
 export default async function handler(req, res) {
@@ -179,10 +184,10 @@ export default async function handler(req, res) {
   const { name, email, subject, message } = req.body ?? {}
 
   const errors = []
-  if (!name?.trim())            errors.push('name')
+  if (!name?.trim())                          errors.push('name')
   if (!email?.trim() || !isValidEmail(email)) errors.push('email')
-  if (!subject?.trim())         errors.push('subject')
-  if (!message?.trim())         errors.push('message')
+  if (!subject?.trim())                       errors.push('subject')
+  if (!message?.trim())                       errors.push('message')
 
   if (errors.length) {
     return res.status(400).json({ error: 'Champs invalides ou manquants', fields: errors })
@@ -194,27 +199,36 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Configuration serveur manquante' })
   }
 
+  const n = name.trim()
+  const e = email.trim()
+  const s = subject.trim()
+  const m = message.trim()
+
+  // ── Email 1 : notification interne ──
   try {
-    // Email 1 — notification interne
     await sendEmail({
       from: SENDER,
       to: [RECIPIENT],
-      reply_to: email.trim(),
-      subject: `[GF Web] ${subject.trim()} — ${name.trim()}`,
-      html: notificationHtml({ name: name.trim(), email: email.trim(), subject: subject.trim(), message: message.trim() }),
+      reply_to: e,
+      subject: `[GF Web] ${s} — ${n}`,
+      html: notificationHtml({ name: n, email: e, subject: s, message: m }),
     }, apiKey)
-
-    // Email 2 — confirmation au client
-    await sendEmail({
-      from: SENDER,
-      to: [email.trim()],
-      subject: 'Votre message a bien été reçu — GF Web',
-      html: confirmationHtml({ name: name.trim() }),
-    }, apiKey)
-
-    return res.status(200).json({ success: true })
   } catch (err) {
-    console.error('[contact] Erreur envoi:', err.message)
+    console.error('[contact] notification FAILED:', String(err))
     return res.status(500).json({ error: 'Échec de l\'envoi. Réessayez ou contactez-moi directement.' })
   }
+
+  // ── Email 2 : confirmation client (non bloquant) ──
+  try {
+    await sendEmail({
+      from: SENDER,
+      to: [e],
+      subject: 'Votre message a bien été reçu — GF Web',
+      html: confirmationHtml({ name: n }),
+    }, apiKey)
+  } catch (err) {
+    console.error('[contact] confirmation FAILED:', String(err))
+  }
+
+  return res.status(200).json({ success: true })
 }

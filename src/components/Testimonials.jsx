@@ -186,13 +186,19 @@ export default function Testimonials() {
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         if (existing) setAlreadyReviewed(true)
-        const isOAuthRedirect = window.location.hash.includes('access_token')
-        if (isOAuthRedirect && !existing) {
-          setFormOpen(true)
-          setTimeout(() => {
-            document.getElementById('temoignages')?.scrollIntoView({ behavior: 'smooth' })
-          }, 400)
-          window.history.replaceState(null, '', window.location.pathname)
+
+        // Détecte un retour OAuth (flux PKCE ou implicite) via sessionStorage.
+        // On ne peut pas se fier au hash (#access_token) car Supabase v2 utilise
+        // PKCE par défaut (code dans ?code=, pas dans le hash).
+        const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
+        if (oauthIntent) {
+          sessionStorage.removeItem('oauth_redirect_intent')
+          if (!existing) {
+            setFormOpen(true)
+            setTimeout(() => {
+              document.getElementById(oauthIntent)?.scrollIntoView({ behavior: 'smooth' })
+            }, 800)
+          }
         }
       }
     }
@@ -221,6 +227,10 @@ export default function Testimonials() {
   }, [])
 
   const signInWithGoogle = async () => {
+    // Mémorise l'intent de scroll avant la redirection OAuth.
+    // La session n'existe pas encore à ce stade, donc on ne peut pas
+    // détecter le retour via onAuthStateChange de façon fiable (race condition).
+    sessionStorage.setItem('oauth_redirect_intent', 'temoignages')
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: window.location.origin + '/' },
