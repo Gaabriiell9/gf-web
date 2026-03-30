@@ -63,7 +63,6 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
       const { data } = await supabase
         .from('reviews')
         .select('*')
-        .eq('approved', true)
         .order('created_at', { ascending: false })
       setReviews(data || [])
 
@@ -164,7 +163,6 @@ export default function Testimonials() {
         const { data, error } = await supabase
           .from('reviews')
           .select('*')
-          .eq('approved', true)
           .order('created_at', { ascending: false })
         if (error) throw error
         setReviews(data || [])
@@ -210,13 +208,12 @@ export default function Testimonials() {
           sessionStorage.removeItem('oauth_redirect_intent')
           setFormOpen(true)
           setTimeout(() => {
-            const el = document.getElementById('avis')
-            console.log('[OAuth] scroll — element #avis:', el)
             window.location.hash = '#avis'
-            if (el) {
-              window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
-            }
+            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }, 1500)
+          setTimeout(() => {
+            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 2000)
         }
       }
 
