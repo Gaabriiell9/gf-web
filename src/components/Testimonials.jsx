@@ -239,7 +239,7 @@ export default function Testimonials() {
     sessionStorage.setItem('oauth_redirect_intent', 'avis')
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: window.location.origin },
+      options: { redirectTo: 'https://gf-web.fr' },
     })
   }
 
