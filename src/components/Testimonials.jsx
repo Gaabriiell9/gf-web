@@ -156,6 +156,7 @@ export default function Testimonials() {
   const [user, setUser] = useState(null)
   const [formOpen, setFormOpen] = useState(false)
   const [alreadyReviewed, setAlreadyReviewed] = useState(false)
+  const [authReady, setAuthReady] = useState(false)
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -187,6 +188,7 @@ export default function Testimonials() {
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         if (existing) setAlreadyReviewed(true)
       }
+      setAuthReady(true)
     }
     init()
 
@@ -207,14 +209,19 @@ export default function Testimonials() {
         if (oauthIntent && !existing) {
           sessionStorage.removeItem('oauth_redirect_intent')
           setFormOpen(true)
-          setTimeout(() => {
-            window.location.hash = '#avis'
-            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }, 1500)
-          setTimeout(() => {
-            document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }, 2000)
+          window.location.hash = '#avis'
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            })
+          })
         }
+
+        setAuthReady(true)
+      }
+
+      if (event === 'INITIAL_SESSION' && !session?.user) {
+        setAuthReady(true)
       }
 
       if (event === 'SIGNED_OUT') {
@@ -297,13 +304,13 @@ export default function Testimonials() {
             <p className={styles.emptyText}>
               Vous avez travaillé avec moi ? Partagez votre expérience en quelques secondes.
             </p>
-            {!user && (
+            {authReady && !user && (
               <button className={styles.googleBtn} onClick={signInWithGoogle}>
                 <GoogleIcon />
                 Laisser un avis avec Google
               </button>
             )}
-            {user && (
+            {authReady && user && (
               <div className={styles.emptyFormArea}>
                 <ReviewForm
                   user={user}
@@ -319,7 +326,7 @@ export default function Testimonials() {
         )}
 
         {/* ── Form area (when reviews exist) ── */}
-        {!loading && reviews.length > 0 && (
+        {!loading && reviews.length > 0 && authReady && (
           <div className={styles.formArea}>
             {!user ? (
               <button className={styles.googleBtn} onClick={signInWithGoogle}>
