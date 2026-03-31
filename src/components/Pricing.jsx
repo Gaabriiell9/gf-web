@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: 'Application Web',
-    price: 'À partir de 1\u202f200€',
+    price: 'À partir de 1\u00a0200€',
     monthly: 'ou 110€/mois avec engagement 1 an',
     desc: "Pour les projets nécessitant une logique métier, une base de données ou des paiements.",
     items: [
