@@ -1,45 +1,27 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './OfferPage.module.css'
+import styles from './ProductPage.module.css'
 
-const profiles = [
+const cards = [
   {
-    icon: '🔨',
-    name: 'Artisan & freelance',
-    desc: "Plombier, photographe, coach — vous avez besoin d'être trouvé en ligne par vos clients locaux.",
+    icon: '🎨',
+    title: 'Design sur-mesure',
+    desc: "Créé spécialement pour vous — vos couleurs, votre ton, votre identité. Aucun template.",
   },
   {
-    icon: '🛍️',
-    name: 'Commerçant',
-    desc: "Boutique, restaurant, salon — présentez vos services et donnez envie de venir vous voir.",
+    icon: '📱',
+    title: 'Responsive & rapide',
+    desc: "Parfait sur téléphone, tablette et ordinateur. Chargement optimisé pour ne perdre aucun visiteur.",
   },
   {
-    icon: '🤝',
-    name: 'Association',
-    desc: "Présentez vos activités, recrutez des membres, informez votre communauté.",
-  },
-]
-
-const obtentions = [
-  {
-    num: '01',
-    title: 'Un site qui vous ressemble',
-    desc: "Conçu spécialement pour votre activité. Vos couleurs, votre ton, votre identité. Aucun template.",
-  },
-  {
-    num: '02',
-    title: 'Visible sur tous les écrans',
-    desc: "Téléphone, tablette, ordinateur. Vos clients vous trouvent parfaitement quel que soit leur appareil.",
-  },
-  {
-    num: '03',
+    icon: '🔍',
     title: 'Référencé sur Google',
-    desc: "SEO intégré dès le départ. Vous apparaissez dans les recherches locales sans effort supplémentaire.",
+    desc: "SEO intégré dès le départ : balises, structure, vitesse. Vous apparaissez dans les recherches locales.",
   },
   {
-    num: '04',
-    title: 'Livré en 2 semaines',
-    desc: "Du premier échange à la mise en ligne — rapide, sans surprise et sans jargon technique.",
+    icon: '✉️',
+    title: 'Formulaire de contact',
+    desc: "Vos visiteurs vous écrivent directement depuis le site. Les messages arrivent dans votre boîte mail.",
   },
 ]
 
@@ -47,134 +29,112 @@ const steps = [
   {
     num: '01',
     title: 'On échange',
-    desc: "Vous me parlez de votre activité. Devis gratuit sous 24h.",
+    desc: "Vous me parlez de votre activité et de vos attentes. Devis gratuit et personnalisé sous 24h.",
   },
   {
     num: '02',
     title: 'Je conçois',
-    desc: "Maquette complète à valider avant de coder.",
+    desc: "Je crée une maquette complète que vous validez avant que le moindre code soit écrit.",
   },
   {
     num: '03',
     title: 'Votre site est en ligne',
-    desc: "Je m'occupe de tout, vous recevez les clés.",
+    desc: "Je m'occupe de tout — développement, mise en ligne, tests. Vous recevez les clés.",
   },
 ]
 
 export default function SiteVitrine() {
-  const pageRef = useRef(null)
-
   useEffect(() => {
-    const els = pageRef.current?.querySelectorAll('.reveal')
-    if (!els) return
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
-      }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    )
-    els.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    window.scrollTo(0, 0)
   }, [])
 
   return (
-    <div className={styles.page} ref={pageRef}>
+    <div className={styles.page}>
 
-      {/* ── HERO ── */}
-      <section className={styles.hero}>
+      {/* ── 1. TOPBAR ── */}
+      <nav className={styles.topbar}>
+        <div className={styles.topbarInner}>
+          <Link to="/#tarifs" className={styles.topbarBack}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span>Retour aux tarifs</span>
+          </Link>
+          <span className={styles.topbarTitle}>Site Vitrine</span>
+          <a href="/#contact" className={styles.topbarCta}>Demander un devis</a>
+        </div>
+      </nav>
+
+      {/* ── 2. INTRO ── */}
+      <section className={styles.intro}>
         <div className={styles.wrap}>
-          <div className={styles.heroTop}>
-            <Link to="/#tarifs" className={styles.back}>
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Retour aux tarifs
-            </Link>
-            <p className={`${styles.heroLabel} reveal`}>Développement web</p>
-            <h1 className={`${styles.heroTitle} reveal`}>Site<br />Vitrine</h1>
-            <p className={`${styles.heroTagline} reveal`}>
-              Une présence en ligne professionnelle, livrée en deux semaines, sans vous prendre la tête.
-            </p>
-          </div>
-          <div className={`${styles.heroBottom} reveal`}>
-            <div className={styles.heroPriceBlock}>
-              <span className={styles.heroPriceFrom}>À partir de</span>
-              <span className={styles.heroPrice}>400€</span>
+          <div className={styles.introGrid}>
+            <div className={styles.introLeft}>
+              <span className={styles.introLabel}>Développement web</span>
+              <h1 className={styles.introTitle}>Site<br />Vitrine</h1>
+              <p className={styles.introTagline}>
+                Une présence en ligne professionnelle, livrée en deux semaines, sans vous prendre la tête.
+              </p>
             </div>
-            <a href="/#contact" className={styles.heroCta}>Demander un devis</a>
+            <div className={styles.introRight}>
+              <span className={styles.priceFrom}>À partir de</span>
+              <span className={styles.priceMain}>400€</span>
+              <span className={styles.priceMonthly}>ou 35€/mois avec engagement 1 an</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── POUR QUI ── */}
-      <section className={styles.section}>
+      {/* ── 3. SÉPARATEUR ── */}
+      <div className={styles.divider} />
+
+      {/* ── 4. INCLUS ── */}
+      <section className={styles.inclus}>
         <div className={styles.wrap}>
-          <div className={`${styles.sectionMeta} reveal`}>
-            <span className={styles.sectionNum}>01</span>
-            <h2 className={styles.sectionTitle}>Pour qui ?</h2>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionLabel}>Ce que vous obtenez</span>
+            <h2 className={styles.sectionTitle}>Inclus dans cette formule</h2>
           </div>
-          <div className={`${styles.profiles} reveal`}>
-            {profiles.map((p) => (
-              <div key={p.name} className={styles.profileCard}>
-                <span className={styles.profileIcon}>{p.icon}</span>
-                <p className={styles.profileName}>{p.name}</p>
-                <p className={styles.profileDesc}>{p.desc}</p>
+          <div className={styles.cardsGrid}>
+            {cards.map((c) => (
+              <div key={c.title} className={styles.card}>
+                <span className={styles.cardIcon}>{c.icon}</span>
+                <p className={styles.cardTitle}>{c.title}</p>
+                <p className={styles.cardDesc}>{c.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CE QUE VOUS OBTENEZ ── */}
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
+      {/* ── 5. TIMELINE ── */}
+      <section className={styles.timeline}>
         <div className={styles.wrap}>
-          <div className={`${styles.sectionMeta} reveal`}>
-            <span className={styles.sectionNum}>02</span>
-            <h2 className={styles.sectionTitle}>Ce que vous obtenez</h2>
-          </div>
-          <div className={styles.obtentions}>
-            {obtentions.map((o, i) => (
-              <div key={o.num} className={`${styles.obtentionItem} reveal reveal-delay-${(i % 2) + 1}`}>
-                <span className={styles.obtentionNum}>{o.num}</span>
-                <h3 className={styles.obtentionTitle}>{o.title}</h3>
-                <p className={styles.obtentionDesc}>{o.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── COMMENT ÇA SE PASSE ── */}
-      <section className={styles.section}>
-        <div className={styles.wrap}>
-          <div className={`${styles.sectionMeta} reveal`}>
-            <span className={styles.sectionNum}>03</span>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionLabel}>Déroulement</span>
             <h2 className={styles.sectionTitle}>Comment ça se passe ?</h2>
           </div>
-          <div className={`${styles.steps} reveal`}>
-            {steps.map((s, i) => [
-              <div key={s.num} className={styles.step}>
-                <span className={styles.stepNum}>{s.num}</span>
-                <p className={styles.stepTitle}>{s.title}</p>
-                <p className={styles.stepDesc}>{s.desc}</p>
-              </div>,
-              i < steps.length - 1 && (
-                <div key={`arr-${i}`} className={styles.stepArrow}>→</div>
-              ),
-            ])}
+          <div className={styles.timelineSteps}>
+            {steps.map((s) => (
+              <div key={s.num} className={styles.timelineStep}>
+                <span className={styles.timelineNum}>{s.num}</span>
+                <p className={styles.timelineTitle}>{s.title}</p>
+                <p className={styles.timelineDesc}>{s.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA FINAL ── */}
-      <section className={styles.ctaSection}>
+      {/* ── 6. BLOC FINAL ── */}
+      <section className={styles.finalBlock}>
         <div className={styles.wrap}>
-          <div className={`${styles.ctaInner} reveal`}>
-            <h2 className={styles.ctaTitle}>Prêt à<br />démarrer ?</h2>
-            <p className={styles.ctaSub}>
-              Décrivez votre projet en quelques lignes. Je vous réponds sous 24h avec un devis gratuit.
+          <div className={styles.finalInner}>
+            <h2 className={styles.finalTitle}>Une question ?<br />Parlons-en.</h2>
+            <p className={styles.finalSub}>
+              Décrivez votre projet en quelques lignes. Je vous réponds sous 24h avec un devis gratuit et sans engagement.
             </p>
-            <a href="/#contact" className={styles.ctaBtn}>Prendre contact</a>
+            <a href="/#contact" className={styles.finalBtn}>Écrire un message</a>
           </div>
         </div>
       </section>

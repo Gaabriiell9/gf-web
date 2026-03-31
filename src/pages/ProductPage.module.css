@@ -1,0 +1,376 @@
+/* ══════════════════════════════════════
+   PRODUCT PAGE — fiche produit épurée
+   ══════════════════════════════════════ */
+
+.page {
+  background: #080808;
+  min-height: 100svh;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+}
+
+/* ══════════════════
+   1. TOPBAR
+   ══════════════════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(8, 8, 8, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.topbarInner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+  height: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.topbarBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.topbarBack:hover { color: #c8f135; }
+
+.topbarTitle {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #f0ede8;
+}
+
+.topbarCta {
+  display: inline-block;
+  margin-left: auto;
+  background: #c8f135;
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 9px 20px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.topbarCta:hover { opacity: 0.85; }
+
+/* ══════════════════
+   2. INTRO (2 colonnes)
+   ══════════════════ */
+.intro {
+  padding: clamp(72px, 10vw, 120px) 0 clamp(64px, 8vw, 96px);
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: end;
+}
+
+.introLeft {}
+
+.introLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #c8f135;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.introTitle {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: #f0ede8;
+  margin-bottom: 20px;
+}
+
+.introTagline {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: #888;
+  line-height: 1.75;
+  max-width: 440px;
+}
+
+.introRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.priceFrom {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.priceMain {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 9vw, 112px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #f0ede8;
+}
+
+.priceMonthly {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #555;
+  text-align: right;
+}
+
+/* ══════════════════
+   3. SÉPARATEUR
+   ══════════════════ */
+.divider {
+  height: 2px;
+  background: #c8f135;
+  opacity: 0.25;
+}
+
+/* ══════════════════
+   4. INCLUS
+   ══════════════════ */
+.inclus {
+  padding: clamp(72px, 10vw, 120px) 0;
+}
+
+.sectionHeader {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #555;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #f0ede8;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.card:hover {
+  border-color: #2a2a2a;
+  background: #141414;
+}
+
+.cardIcon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0ede8;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.75;
+}
+
+/* ══════════════════
+   5. TIMELINE
+   ══════════════════ */
+.timeline {
+  padding: clamp(72px, 10vw, 120px) 0;
+  border-top: 1px solid #1a1a1a;
+}
+
+.timelineSteps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
+  gap: 0;
+}
+
+/* ligne pointillée entre étapes */
+.timelineSteps::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: calc(33.33% / 2);
+  right: calc(33.33% / 2);
+  height: 1px;
+  border-top: 2px dashed rgba(200, 241, 53, 0.3);
+  pointer-events: none;
+}
+
+.timelineStep {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 clamp(16px, 2.5vw, 32px);
+  padding-top: 0;
+}
+
+.timelineStep:first-child { padding-left: 0; }
+.timelineStep:last-child  { padding-right: 0; }
+
+.timelineNum {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #111;
+  border: 1px solid #c8f135;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #c8f135;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineTitle {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0ede8;
+}
+
+.timelineDesc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.75;
+}
+
+/* ══════════════════
+   6. BLOC FINAL
+   ══════════════════ */
+.finalBlock {
+  background: #111;
+  border-top: 1px solid #1e1e1e;
+  padding: clamp(64px, 9vw, 112px) 0;
+}
+
+.finalInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+}
+
+.finalTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f0ede8;
+}
+
+.finalSub {
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: #888;
+  line-height: 1.75;
+  max-width: 440px;
+}
+
+.finalBtn {
+  display: inline-block;
+  background: transparent;
+  color: #f0ede8;
+  border: 1px solid #333;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 14px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.finalBtn:hover {
+  border-color: #c8f135;
+  color: #c8f135;
+}
+
+/* ══════════════════
+   RESPONSIVE
+   ══════════════════ */
+@media (max-width: 768px) {
+  .introGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .introRight {
+    align-items: flex-start;
+  }
+  .priceMonthly { text-align: left; }
+  .cardsGrid { grid-template-columns: 1fr; }
+  .timelineSteps {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .timelineSteps::before { display: none; }
+  .timelineStep { padding: 0; }
+  .topbarTitle { display: none; }
+}
+
+@media (max-width: 480px) {
+  .topbarBack span { display: none; }
+}
