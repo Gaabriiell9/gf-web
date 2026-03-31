@@ -6,12 +6,12 @@ const profiles = [
   {
     icon: '🚀',
     name: 'Entrepreneur',
-    desc: "Vous avez une idée de produit digital — plateforme, outil SaaS, service en ligne — et vous voulez la concrétiser.",
+    desc: "Vous avez une idée de produit digital — plateforme, outil SaaS, service en ligne — et vous voulez la lancer.",
   },
   {
     icon: '🏢',
     name: 'PME & commerce',
-    desc: "Vous avez besoin d'automatiser un process, de gérer des commandes ou d'offrir un espace client à vos acheteurs.",
+    desc: "Vous avez besoin d'automatiser un process, gérer des commandes ou offrir un espace client.",
   },
   {
     icon: '🌱',
@@ -33,13 +33,13 @@ const obtentions = [
   },
   {
     num: '03',
-    title: 'Un tableau de bord',
-    desc: "Gérez vos données, vos commandes, vos utilisateurs depuis une interface claire faite pour vous — sans toucher au code.",
+    title: 'Un tableau de bord sur mesure',
+    desc: "Gérez vos données, commandes et utilisateurs depuis une interface claire faite pour vous.",
   },
   {
     num: '04',
     title: 'Livré et déployé',
-    desc: "Mise en production incluse. Vous recevez un produit fonctionnel, documenté et prêt à accueillir vos premiers utilisateurs.",
+    desc: "Mise en production incluse. Un produit complet, documenté, prêt pour vos premiers utilisateurs.",
   },
 ]
 
@@ -47,17 +47,17 @@ const steps = [
   {
     num: '01',
     title: 'On analyse',
-    desc: "On cadre ensemble votre besoin, vos utilisateurs et vos priorités. Je traduis ça en plan technique clair.",
+    desc: "On cadre votre besoin, vos utilisateurs, vos priorités. Devis gratuit sous 24h.",
   },
   {
     num: '02',
     title: 'Je développe',
-    desc: "Développement par étapes avec démos régulières. Vous suivez l'avancement et pouvez ajuster.",
+    desc: "Par étapes avec démos régulières. Vous suivez et vous ajustez.",
   },
   {
     num: '03',
     title: 'Votre appli est live',
-    desc: "Déploiement, tests, formation. Votre produit est en ligne et vous savez comment l'utiliser.",
+    desc: "Déploiement, tests, formation. Vous êtes autonome dès le premier jour.",
   },
 ]
 
@@ -152,18 +152,16 @@ export default function ApplicationWeb() {
             <h2 className={styles.sectionTitle}>Comment ça se passe ?</h2>
           </div>
           <div className={`${styles.steps} reveal`}>
-            {steps.map((s, i) => (
-              <>
-                <div key={s.num} className={styles.step}>
-                  <span className={styles.stepNum}>{s.num}</span>
-                  <p className={styles.stepTitle}>{s.title}</p>
-                  <p className={styles.stepDesc}>{s.desc}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div key={`arrow-${i}`} className={styles.stepArrow}>→</div>
-                )}
-              </>
-            ))}
+            {steps.map((s, i) => [
+              <div key={s.num} className={styles.step}>
+                <span className={styles.stepNum}>{s.num}</span>
+                <p className={styles.stepTitle}>{s.title}</p>
+                <p className={styles.stepDesc}>{s.desc}</p>
+              </div>,
+              i < steps.length - 1 && (
+                <div key={`arr-${i}`} className={styles.stepArrow}>→</div>
+              ),
+            ])}
           </div>
         </div>
       </section>

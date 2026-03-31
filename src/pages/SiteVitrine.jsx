@@ -6,17 +6,17 @@ const profiles = [
   {
     icon: '🔨',
     name: 'Artisan & freelance',
-    desc: "Plombier, électricien, graphiste, photographe — vous avez besoin d'être trouvé en ligne par vos clients locaux.",
+    desc: "Plombier, photographe, coach — vous avez besoin d'être trouvé en ligne par vos clients locaux.",
   },
   {
     icon: '🛍️',
     name: 'Commerçant',
-    desc: "Boutique, restaurant, salon — présentez vos produits, vos horaires et donnez envie de venir vous voir.",
+    desc: "Boutique, restaurant, salon — présentez vos services et donnez envie de venir vous voir.",
   },
   {
     icon: '🤝',
     name: 'Association',
-    desc: "Club sportif, association culturelle — un endroit pour présenter vos activités et recruter de nouveaux membres.",
+    desc: "Présentez vos activités, recrutez des membres, informez votre communauté.",
   },
 ]
 
@@ -24,22 +24,22 @@ const obtentions = [
   {
     num: '01',
     title: 'Un site qui vous ressemble',
-    desc: "Design créé spécialement pour vous, pas un template vu mille fois. Vos couleurs, votre ton, votre identité.",
+    desc: "Conçu spécialement pour votre activité. Vos couleurs, votre ton, votre identité. Aucun template.",
   },
   {
     num: '02',
-    title: 'Visible partout',
-    desc: "S'adapte parfaitement aux téléphones, tablettes et ordinateurs. Vos clients vous trouvent quel que soit leur écran.",
+    title: 'Visible sur tous les écrans',
+    desc: "Téléphone, tablette, ordinateur. Vos clients vous trouvent parfaitement quel que soit leur appareil.",
   },
   {
     num: '03',
-    title: 'Trouvable sur Google',
-    desc: "Référencement intégré dès le départ — balises, vitesse, structure. Vous apparaissez quand vos clients cherchent.",
+    title: 'Référencé sur Google',
+    desc: "SEO intégré dès le départ. Vous apparaissez dans les recherches locales sans effort supplémentaire.",
   },
   {
     num: '04',
     title: 'Livré en 2 semaines',
-    desc: "Pas de projet qui traîne des mois. Du premier échange à la mise en ligne, comptez 1 à 2 semaines.",
+    desc: "Du premier échange à la mise en ligne — rapide, sans surprise et sans jargon technique.",
   },
 ]
 
@@ -47,17 +47,17 @@ const steps = [
   {
     num: '01',
     title: 'On échange',
-    desc: "Vous me parlez de votre activité. Je pose des questions. Devis gratuit sous 24h.",
+    desc: "Vous me parlez de votre activité. Devis gratuit sous 24h.",
   },
   {
     num: '02',
     title: 'Je conçois',
-    desc: "Maquette complète à valider avant de coder. Vous voyez le résultat avant qu'il existe.",
+    desc: "Maquette complète à valider avant de coder.",
   },
   {
     num: '03',
     title: 'Votre site est en ligne',
-    desc: "Je m'occupe de tout. Vous recevez un site prêt à l'emploi, expliqué simplement.",
+    desc: "Je m'occupe de tout, vous recevez les clés.",
   },
 ]
 
@@ -152,18 +152,16 @@ export default function SiteVitrine() {
             <h2 className={styles.sectionTitle}>Comment ça se passe ?</h2>
           </div>
           <div className={`${styles.steps} reveal`}>
-            {steps.map((s, i) => (
-              <>
-                <div key={s.num} className={styles.step}>
-                  <span className={styles.stepNum}>{s.num}</span>
-                  <p className={styles.stepTitle}>{s.title}</p>
-                  <p className={styles.stepDesc}>{s.desc}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div key={`arrow-${i}`} className={styles.stepArrow}>→</div>
-                )}
-              </>
-            ))}
+            {steps.map((s, i) => [
+              <div key={s.num} className={styles.step}>
+                <span className={styles.stepNum}>{s.num}</span>
+                <p className={styles.stepTitle}>{s.title}</p>
+                <p className={styles.stepDesc}>{s.desc}</p>
+              </div>,
+              i < steps.length - 1 && (
+                <div key={`arr-${i}`} className={styles.stepArrow}>→</div>
+              ),
+            ])}
           </div>
         </div>
       </section>
