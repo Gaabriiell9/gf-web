@@ -10,19 +10,19 @@ const timeline = [
       'Découverte du développement web en autodidacte. HTML, CSS, JavaScript, premiers sites construits depuis zéro par curiosité pure.',
   },
   {
-    year: '2021',
+    year: '2022',
     title: 'Baccalauréat',
     description:
       'Obtention du bac. En parallèle, exploration intensive de Linux, des réseaux et de la cybersécurité sur mon temps libre.',
   },
   {
-    year: '2022 - 2023',
+    year: '2023 - 2024',
     title: 'L1 Informatique',
     description:
       'Première année de licence informatique. Fondamentaux en algorithmique, programmation orientée objet et architecture des systèmes.',
   },
   {
-    year: '2023 - 2025',
+    year: '2024 - 2026',
     title: 'Bachelor Cybersécurité & Ethical Hacking',
     description:
       'Formation spécialisée en sécurité offensive et défensive. Pentesting, analyse de vulnérabilités, réseaux, cryptographie et tests d\'intrusion sur environnements contrôlés.',
@@ -109,22 +109,6 @@ export default function About() {
             {['21 ans', 'Micro-entrepreneur', 'Développeur web', 'Expert en informatique'].map((p) => (
               <span key={p} className={styles.pill}>{p}</span>
             ))}
-          </div>
-          <div className={`${styles.stats} reveal`}>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>4</span>
-              <span className={styles.statLabel}>Projets livrés</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>3</span>
-              <span className={styles.statLabel}>Clients actifs</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>7</span>
-              <span className={styles.statLabel}>Ans de pratique</span>
-            </div>
           </div>
         </div>
       </section>
