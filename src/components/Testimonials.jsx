@@ -178,34 +178,14 @@ export default function Testimonials() {
   }, [])
 
   useEffect(() => {
-    console.log('[OAuth] mount — sessionStorage intent:', sessionStorage.getItem('oauth_redirect_intent'))
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
 
-      // INITIAL_SESSION (échange PKCE rapide) ou SIGNED_IN (échange lent) :
-      // même logique — sessionStorage est le seul gate pour le scroll
       if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN') && session?.user) {
         const { data: existing } = await supabase
           .from('reviews').select('id').eq('user_id', session.user.id).single()
         setAlreadyReviewed(!!existing)
-
-        const oauthIntent = sessionStorage.getItem('oauth_redirect_intent')
-        console.log('[OAuth]', event, '— oauthIntent:', oauthIntent, '| existing:', !!existing)
-
-        if (oauthIntent) {
-          sessionStorage.removeItem('oauth_redirect_intent')
-          if (!existing) {
-            setFormOpen(true)
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              })
-            })
-          }
-        }
-
         setAuthReady(true)
       }
 
@@ -224,11 +204,9 @@ export default function Testimonials() {
   }, [])
 
   const signInWithGoogle = async () => {
-    console.log('[OAuth] intent posé, redirection Google...')
-    sessionStorage.setItem('oauth_redirect_intent', 'avis')
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'https://gf-web.fr' },
+      options: { redirectTo: 'https://gf-web.fr/callback' },
     })
   }
 

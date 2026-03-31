@@ -12,6 +12,7 @@ import About from './pages/About'
 import Legal from './pages/Legal'
 import RepairPage from './pages/RepairPage'
 import BuildPage from './pages/BuildPage'
+import Callback from './pages/Callback'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/mentions-legales" element={<Legal />} />
         <Route path="/reparation-pc" element={<RepairPage />} />
         <Route path="/montage-pc" element={<BuildPage />} />
+        <Route path="/callback" element={<Callback />} />
       </Routes>
       <Footer />
     </>
