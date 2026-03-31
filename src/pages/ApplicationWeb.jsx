@@ -45,29 +45,21 @@ const steps = [
 
 export default function ApplicationWeb() {
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   return (
     <div className={styles.page}>
 
-      {/* ── 1. TOPBAR ── */}
-      <nav className={styles.topbar}>
-        <div className={styles.topbarInner}>
-          <Link to="/#tarifs" className={styles.topbarBack}>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Retour aux tarifs</span>
-          </Link>
-          <span className={styles.topbarTitle}>Application Web</span>
-          <a href="/#contact" className={styles.topbarCta}>Demander un devis</a>
-        </div>
-      </nav>
-
       {/* ── 2. INTRO ── */}
       <section className={styles.intro}>
         <div className={styles.wrap}>
+          <Link to="/#tarifs" className={styles.backLink}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Retour aux tarifs
+          </Link>
           <div className={styles.introGrid}>
             <div className={styles.introLeft}>
               <span className={styles.introLabel}>Développement web</span>

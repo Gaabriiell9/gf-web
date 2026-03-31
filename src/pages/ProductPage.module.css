@@ -14,49 +14,21 @@
 }
 
 /* ══════════════════
-   1. TOPBAR
+   1. LIEN RETOUR
    ══════════════════ */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(8, 8, 8, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.topbarInner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 72px);
-  height: 56px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-}
-
-.topbarBack {
+.backLink {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: #666;
+  color: #555;
   text-decoration: none;
   transition: color 0.2s;
+  margin-bottom: 48px;
 }
-.topbarBack:hover { color: #c8f135; }
-
-.topbarTitle {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-align: center;
-  color: #f0ede8;
-}
+.backLink:hover { color: #c8f135; }
 
 .topbarCta {
   display: inline-block;
@@ -79,7 +51,7 @@
    2. INTRO (2 colonnes)
    ══════════════════ */
 .intro {
-  padding: clamp(72px, 10vw, 120px) 0 clamp(64px, 8vw, 96px);
+  padding: clamp(100px, 14vw, 160px) 0 clamp(64px, 8vw, 96px);
   border-bottom: 1px solid #1a1a1a;
 }
 

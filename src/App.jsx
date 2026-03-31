@@ -1,13 +1,5 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-
-function ScrollToTop() {
-  const { pathname } = useLocation()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
-  return null
-}
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
@@ -24,6 +16,14 @@ import BuildPage from './pages/BuildPage'
 import Callback from './pages/Callback'
 import SiteVitrine from './pages/SiteVitrine'
 import ApplicationWeb from './pages/ApplicationWeb'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
 
 export default function App() {
   return (
