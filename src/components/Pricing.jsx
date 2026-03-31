@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Pricing.module.css'
 
 const plans = [
   {
     name: 'Site Vitrine',
     price: 'À partir de 400€',
+    monthly: 'ou 35€/mois avec engagement 1 an',
     desc: 'Pour les artisans, freelances et associations qui veulent une présence web professionnelle.',
     items: [
       'Design sur-mesure responsive',
@@ -14,13 +16,15 @@ const plans = [
       'Hébergement conseillé',
       'Livraison en 1 à 2 semaines',
     ],
-    cta: 'Demander un devis',
-    href: '/#contact',
-    featured: false,
+    cta: 'Voir les détails',
+    href: '/site-vitrine',
+    featured: true,
+    badge: 'Populaire',
   },
   {
     name: 'Application Web',
-    price: 'À partir de 1 200€',
+    price: 'À partir de 1\u202f200€',
+    monthly: 'ou 110€/mois avec engagement 1 an',
     desc: "Pour les projets nécessitant une logique métier, une base de données ou des paiements.",
     items: [
       'Authentification utilisateurs',
@@ -30,14 +34,13 @@ const plans = [
       'Déploiement inclus',
       'Livraison en 3 à 6 semaines',
     ],
-    cta: 'Demander un devis',
-    href: '/#contact',
-    featured: true,
-    badge: 'Populaire',
+    cta: 'Voir les détails',
+    href: '/application-web',
+    featured: false,
   },
   {
     name: 'Maintenance & Support',
-    price: 'À partir de 80€/mois',
+    price: 'À partir de 30€/mois',
     desc: 'Pour garder votre site à jour, sécurisé et fonctionnel sur la durée.',
     items: [
       'Mises à jour techniques',
@@ -88,7 +91,12 @@ export default function Pricing() {
               )}
               <div className={styles.cardTop}>
                 <h3 className={styles.planName}>{plan.name}</h3>
-                <p className={styles.price}>{plan.price}</p>
+                <div>
+                  <p className={styles.price}>{plan.price}</p>
+                  {plan.monthly && (
+                    <p className={styles.monthly}>{plan.monthly}</p>
+                  )}
+                </div>
                 <p className={styles.desc}>{plan.desc}</p>
               </div>
               <ul className={styles.featureList}>
@@ -99,9 +107,15 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a href={plan.href} className={`${styles.cta} ${plan.featured ? styles.ctaFeatured : ''}`}>
-                {plan.cta}
-              </a>
+              {plan.href.startsWith('/#') ? (
+                <a href={plan.href} className={`${styles.cta} ${plan.featured ? styles.ctaFeatured : ''}`}>
+                  {plan.cta}
+                </a>
+              ) : (
+                <Link to={plan.href} className={`${styles.cta} ${plan.featured ? styles.ctaFeatured : ''}`}>
+                  {plan.cta}
+                </Link>
+              )}
             </div>
           ))}
         </div>

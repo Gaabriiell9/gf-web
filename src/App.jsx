@@ -13,6 +13,8 @@ import Legal from './pages/Legal'
 import RepairPage from './pages/RepairPage'
 import BuildPage from './pages/BuildPage'
 import Callback from './pages/Callback'
+import SiteVitrine from './pages/SiteVitrine'
+import ApplicationWeb from './pages/ApplicationWeb'
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
         <Route path="/reparation-pc" element={<RepairPage />} />
         <Route path="/montage-pc" element={<BuildPage />} />
         <Route path="/callback" element={<Callback />} />
+        <Route path="/site-vitrine" element={<SiteVitrine />} />
+        <Route path="/application-web" element={<ApplicationWeb />} />
       </Routes>
       <Footer />
     </>

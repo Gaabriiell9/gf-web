@@ -92,6 +92,16 @@
   letter-spacing: -0.03em;
   color: var(--accent);
   line-height: 1;
+  white-space: nowrap;
+}
+
+.monthly {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
 }
 
 .desc {
