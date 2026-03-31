@@ -4,22 +4,45 @@ import styles from './ProductPage.module.css'
 
 const cards = [
   {
-    icon: '🎨',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    ),
     title: 'Design sur-mesure',
     desc: "Créé spécialement pour vous — vos couleurs, votre ton, votre identité. Aucun template.",
   },
   {
-    icon: '📱',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="15" height="11" rx="1"/>
+        <path d="M17 8h3a1 1 0 011 1v7a1 1 0 01-1 1h-3"/>
+        <path d="M6 18h6"/>
+        <path d="M9 14v4"/>
+      </svg>
+    ),
     title: 'Responsive & rapide',
     desc: "Parfait sur téléphone, tablette et ordinateur. Chargement optimisé pour ne perdre aucun visiteur.",
   },
   {
-    icon: '🔍',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+    ),
     title: 'Référencé sur Google',
     desc: "SEO intégré dès le départ : balises, structure, vitesse. Vous apparaissez dans les recherches locales.",
   },
   {
-    icon: '✉️',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="M2 10h20"/>
+        <path d="M6 15h.01M10 15h4"/>
+      </svg>
+    ),
     title: 'Formulaire de contact',
     desc: "Vos visiteurs vous écrivent directement depuis le site. Les messages arrivent dans votre boîte mail.",
   },
@@ -90,7 +113,7 @@ export default function SiteVitrine() {
           <div className={styles.cardsGrid}>
             {cards.map((c) => (
               <div key={c.title} className={styles.card}>
-                <span className={styles.cardIcon}>{c.icon}</span>
+                <span className={styles.cardIcon} style={{ color: '#c8f135' }}>{c.icon}</span>
                 <p className={styles.cardTitle}>{c.title}</p>
                 <p className={styles.cardDesc}>{c.desc}</p>
               </div>

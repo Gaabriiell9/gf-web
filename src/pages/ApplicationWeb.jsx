@@ -4,22 +4,47 @@ import styles from './ProductPage.module.css'
 
 const cards = [
   {
-    icon: '🔐',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    ),
     title: 'Espace membres',
     desc: "Inscription, connexion, profil personnel. Vos clients accèdent à leur espace privé depuis n'importe quel appareil.",
   },
   {
-    icon: '💳',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="5" width="20" height="14" rx="2"/>
+        <path d="M2 10h20"/>
+        <path d="M6 15h4"/>
+      </svg>
+    ),
     title: 'Paiement en ligne',
     desc: "Vendez des produits, abonnements ou prestations. Encaissement sécurisé et factures automatiques.",
   },
   {
-    icon: '📊',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 20V14"/>
+        <path d="M9 20V10"/>
+        <path d="M14 20V4"/>
+        <path d="M19 20v-6"/>
+      </svg>
+    ),
     title: 'Tableau de bord',
     desc: "Gérez vos données, commandes et utilisateurs depuis une interface claire faite sur mesure pour vous.",
   },
   {
-    icon: '🚀',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L8 6H5a1 1 0 00-1 1v3l-2 5v1h20v-1l-2-5V7a1 1 0 00-1-1h-3L12 2z"/>
+        <path d="M9 21v-1a3 3 0 006 0v1"/>
+        <path d="M12 6v6"/>
+        <path d="M9 12h6"/>
+      </svg>
+    ),
     title: 'Déploiement inclus',
     desc: "Mise en production complète, documentation et suivi post-lancement de 30 jours inclus.",
   },
@@ -90,7 +115,7 @@ export default function ApplicationWeb() {
           <div className={styles.cardsGrid}>
             {cards.map((c) => (
               <div key={c.title} className={styles.card}>
-                <span className={styles.cardIcon}>{c.icon}</span>
+                <span className={styles.cardIcon} style={{ color: '#c8f135' }}>{c.icon}</span>
                 <p className={styles.cardTitle}>{c.title}</p>
                 <p className={styles.cardDesc}>{c.desc}</p>
               </div>
