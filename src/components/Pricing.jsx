@@ -5,7 +5,8 @@ import styles from './Pricing.module.css'
 const plans = [
   {
     name: 'Site Vitrine',
-    price: 'À partir de 400€',
+    price: '400€',
+    priceLabel: 'À partir de',
     monthly: 'ou 35€/mois avec engagement 1 an',
     desc: 'Pour les artisans, freelances et associations qui veulent une présence web professionnelle.',
     items: [
@@ -23,7 +24,8 @@ const plans = [
   },
   {
     name: 'Application Web',
-    price: 'À partir de 1 200€',
+    price: '1200€',
+    priceLabel: 'À partir de',
     monthly: 'ou 110€/mois avec engagement 1 an',
     desc: "Pour les projets nécessitant une logique métier, une base de données ou des paiements.",
     items: [
@@ -40,7 +42,8 @@ const plans = [
   },
   {
     name: 'Maintenance & Support',
-    price: 'À partir de 30€/mois',
+    price: '30€/mois',
+    priceLabel: 'À partir de',
     desc: 'Pour garder votre site à jour, sécurisé et fonctionnel sur la durée.',
     items: [
       'Mises à jour techniques',
@@ -74,8 +77,8 @@ export default function Pricing() {
 
   return (
     <section className={styles.section} id="tarifs" ref={sectionRef}>
-      <div className={styles.inner}>
-        <div className="reveal">
+      <div className={styles.container}>
+        <div className={`${styles.header} reveal`}>
           <p className="section-label">Tarifs</p>
           <h2 className={styles.title}>Formules & Pricing</h2>
         </div>
@@ -89,24 +92,28 @@ export default function Pricing() {
               {plan.badge && (
                 <span className={styles.badge}>{plan.badge}</span>
               )}
+
               <div className={styles.cardTop}>
                 <h3 className={styles.planName}>{plan.name}</h3>
-                <div>
-                  <p className={styles.price} style={{ whiteSpace: 'nowrap' }}>{plan.price}</p>
-                  {plan.monthly && (
-                    <p className={styles.monthly}>{plan.monthly}</p>
-                  )}
+                <div className={styles.priceBlock}>
+                  <span className={styles.priceLabel}>{plan.priceLabel}</span>
+                  <span className={styles.price}>{plan.price}</span>
                 </div>
+                {plan.monthly && (
+                  <p className={styles.monthly}>{plan.monthly}</p>
+                )}
                 <p className={styles.desc}>{plan.desc}</p>
               </div>
+
               <ul className={styles.featureList}>
                 {plan.items.map((item) => (
                   <li key={item} className={styles.featureItem}>
                     <span className={styles.check}>✓</span>
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
+
               {plan.href.startsWith('/#') ? (
                 <a href={plan.href} className={`${styles.cta} ${plan.featured ? styles.ctaFeatured : ''}`}>
                   {plan.cta}
