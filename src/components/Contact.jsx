@@ -5,6 +5,8 @@ const SUBJECTS = [
   'Création de site vitrine',
   'Application web / SaaS',
   'E-commerce',
+  'Réparation PC',
+  'Montage PC',
   'Maintenance & support',
   'Autre',
 ]
@@ -107,6 +109,7 @@ export default function Contact() {
                     id="name"
                     name="name"
                     type="text"
+                    placeholder="Nom et Prénom"
                     value={form.name}
                     onChange={handle}
                     required
@@ -118,6 +121,7 @@ export default function Contact() {
                     id="email"
                     name="email"
                     type="email"
+                    placeholder="Email"
                     value={form.email}
                     onChange={handle}
                     required
@@ -147,6 +151,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows={6}
+                  placeholder="Décrivez votre projet ou votre besoin..."
                   value={form.message}
                   onChange={handle}
                   required
