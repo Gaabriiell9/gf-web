@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: 'Application Web',
-    price: 'À partir de 1\u00a0200€',
+    price: 'À partir de 1 200€',
     monthly: 'ou 110€/mois avec engagement 1 an',
     desc: "Pour les projets nécessitant une logique métier, une base de données ou des paiements.",
     items: [
@@ -92,7 +92,7 @@ export default function Pricing() {
               <div className={styles.cardTop}>
                 <h3 className={styles.planName}>{plan.name}</h3>
                 <div>
-                  <p className={styles.price}>{plan.price}</p>
+                  <p className={styles.price} style={{ whiteSpace: 'nowrap' }}>{plan.price}</p>
                   {plan.monthly && (
                     <p className={styles.monthly}>{plan.monthly}</p>
                   )}
