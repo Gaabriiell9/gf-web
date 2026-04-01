@@ -96,8 +96,8 @@ export default function ApplicationWeb() {
             </div>
             <div className={styles.heroPriceBlock}>
               <span className={styles.priceFrom}>À partir de</span>
-              <span className={styles.price}>1200€</span>
-              <span className={styles.priceMonthly}>ou 110€/mois avec engagement 1 an</span>
+              <span className={styles.price}>900€</span>
+              <span className={styles.priceMonthly}>ou 80€/mois avec engagement 1 an</span>
             </div>
           </div>
 
