@@ -302,7 +302,7 @@
     overflow: hidden;
   }
   .headline {
-    font-size: clamp(32px, 10vw, 48px);
+    font-size: clamp(26px, 8vw, 48px);
     margin-bottom: 24px;
   }
   .line2 { margin-left: 0; }
