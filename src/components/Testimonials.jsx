@@ -179,7 +179,7 @@ export default function Testimonials() {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('[OAuth] onAuthStateChange —', event, '| user:', session?.user?.email ?? 'null')
+      console.log('[OAuth] onAuthStateChange -', event, '| user:', session?.user?.email ?? 'null')
       setUser(session?.user ?? null)
 
       if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN') && session?.user) {

@@ -125,7 +125,7 @@ export default function Pricing() {
 
         <p className={`${styles.note} reveal`}>
           Tous les projets font l'objet d'un devis personnalisé gratuit.
-          TVA non applicable — franchise en base art. 293 B du CGI.
+          TVA non applicable - franchise en base art. 293 B du CGI.
         </p>
       </div>
     </section>

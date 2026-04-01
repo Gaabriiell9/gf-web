@@ -11,7 +11,7 @@ const cards = [
       </svg>
     ),
     title: 'Design sur-mesure',
-    desc: "Créé spécialement pour vous — vos couleurs, votre ton, votre identité. Aucun template.",
+    desc: "Créé spécialement pour vous - vos couleurs, votre ton, votre identité. Aucun template.",
   },
   {
     icon: (
@@ -62,7 +62,7 @@ const steps = [
   {
     num: '03',
     title: 'Votre site est en ligne',
-    desc: "Je m'occupe de tout — développement, mise en ligne, tests. Vous recevez les clés.",
+    desc: "Je m'occupe de tout - développement, mise en ligne, tests. Vous recevez les clés.",
   },
 ]
 

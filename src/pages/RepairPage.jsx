@@ -135,7 +135,7 @@ export default function RepairPage() {
             <p className="section-label">Réparation</p>
             <h2 className={styles.sectionTitle}>Votre machine en panne ?</h2>
             <p className={styles.introText}>
-              PC lent, écran noir, virus, disque dur défaillant, système corrompu — je diagnostique
+              PC lent, écran noir, virus, disque dur défaillant, système corrompu - je diagnostique
               et répare aussi bien les problèmes logiciels que matériels. Intervention à domicile
               sur Bordeaux ou dépôt de la machine.
             </p>
@@ -164,7 +164,7 @@ export default function RepairPage() {
             <p className="section-label">Tarifs</p>
             <h2 className={styles.sectionTitle}>Transparent sur les prix</h2>
             <p className={styles.introText}>
-              Chaque intervention est unique. Ces tarifs sont indicatifs —
+              Chaque intervention est unique. Ces tarifs sont indicatifs -
               un diagnostic gratuit permet d'établir un devis précis avant toute intervention.
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function RepairPage() {
             ))}
           </div>
           <p className={`${styles.pricingNote} reveal`}>
-            TVA non applicable — franchise en base art. 293 B du CGI.
+            TVA non applicable - franchise en base art. 293 B du CGI.
             Déplacement à domicile sur Bordeaux et alentours : 10€.
           </p>
         </div>

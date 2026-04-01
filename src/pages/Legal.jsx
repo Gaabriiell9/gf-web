@@ -10,7 +10,7 @@ const editorRows = [
   { label: 'Email', value: 'joaofarias20@icloud.com', href: 'mailto:joaofarias20@icloud.com' },
   { label: 'Téléphone', value: '+33 6 80 37 45 69', href: 'tel:+33680374569' },
   { label: 'Activité', value: 'Développement web, création de sites internet, conseil en systèmes informatiques' },
-  { label: 'Régime fiscal', value: 'Franchise en base de TVA — TVA non applicable, art. 293 B du CGI' },
+  { label: 'Régime fiscal', value: 'Franchise en base de TVA - TVA non applicable, art. 293 B du CGI' },
 ]
 
 const hostRows = [
