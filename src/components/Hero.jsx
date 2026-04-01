@@ -70,7 +70,7 @@ export default function Hero() {
         </div>
 
         <h1 className={styles.headline}>
-          <span className={styles.line1}>Développement</span>
+          <span className={styles.line1}>Développe<br className={styles.mobileBreak} />ment</span>
           <span className={styles.line2}>
             web<em className={styles.accent}>&</em>
           </span>

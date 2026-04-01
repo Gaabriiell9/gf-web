@@ -164,6 +164,10 @@
   margin-bottom: 2px;
 }
 
+.mobileBreak {
+  display: none;
+}
+
 .badgeSep {
   color: var(--border);
   margin: 0 4px;
@@ -300,9 +304,14 @@
     padding-bottom: 48px;
     justify-content: flex-start;
     overflow: hidden;
+    overflow-x: hidden;
   }
   .headline {
-    font-size: clamp(26px, 8vw, 48px);
+    font-size: clamp(32px, 7vw, 48px);
+    letter-spacing: -1px;
+    white-space: normal;
+    word-break: break-word;
+    width: 100%;
     margin-bottom: 24px;
   }
   .line2 { margin-left: 0; }
@@ -329,6 +338,7 @@
   }
   .badge { margin-bottom: 24px; }
   .scroll { display: none; }
+  .mobileBreak { display: block; }
 }
 
 @media (max-width: 480px) {
