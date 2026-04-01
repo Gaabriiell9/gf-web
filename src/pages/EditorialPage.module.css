@@ -52,6 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
 }
 
 .badge {
@@ -64,12 +65,11 @@
 
 .heroTitle {
   font-family: var(--font-display);
-  font-size: clamp(52px, 7vw, 96px);
+  font-size: clamp(40px, 6vw, 88px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.95;
   color: #f0ede8;
-  white-space: nowrap;
 }
 
 .heroPriceBlock {
@@ -78,6 +78,7 @@
   align-items: flex-end;
   gap: 4px;
   flex-shrink: 0;
+  min-width: 0;
 }
 
 .priceFrom {
@@ -86,15 +87,18 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #555;
+  text-align: right;
 }
 
 .price {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
   color: #c8f135;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .priceMonthly {
@@ -102,6 +106,8 @@
   font-size: 11px;
   letter-spacing: 0.04em;
   color: #555;
+  text-align: right;
+  white-space: nowrap;
 }
 
 /* Ligne 2 */
