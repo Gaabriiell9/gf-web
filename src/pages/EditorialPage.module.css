@@ -1,0 +1,351 @@
+/* ════════════════════════════════════════
+   EDITORIAL PAGE — magazine / left-aligned
+   ════════════════════════════════════════ */
+
+.page {
+  background: #080808;
+  min-height: 100svh;
+}
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 80px);
+}
+
+/* ════════════════════
+   BACK LINK
+   ════════════════════ */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+  padding-top: clamp(100px, 12vw, 140px);
+  margin-bottom: 48px;
+  display: block;
+}
+.back:hover { color: #c8f135; }
+.back svg { display: inline; vertical-align: middle; margin-right: 8px; }
+
+/* ════════════════════
+   HERO
+   ════════════════════ */
+.hero {
+  padding-bottom: clamp(60px, 8vw, 96px);
+}
+
+/* Ligne 1 */
+.heroRow1 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c8f135;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: #f0ede8;
+  white-space: nowrap;
+}
+
+.heroPriceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.priceFrom {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #c8f135;
+}
+
+.priceMonthly {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #555;
+}
+
+/* Ligne 2 */
+.heroRow2 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.tagline {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: #aaa;
+  line-height: 1.65;
+  max-width: 500px;
+  font-weight: 300;
+}
+
+.ctaBtn {
+  display: inline-block;
+  background: transparent;
+  color: #f0ede8;
+  border: 1px solid #333;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 13px 32px;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ctaBtn:hover {
+  border-color: #c8f135;
+  color: #c8f135;
+}
+
+/* ════════════════════
+   SÉPARATEUR
+   ════════════════════ */
+.divider {
+  border: none;
+  border-top: 1px solid #222;
+  margin: clamp(40px, 6vw, 60px) 0;
+}
+
+/* ════════════════════
+   SECTION LABEL
+   ════════════════════ */
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c8f135;
+  display: block;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+/* ════════════════════
+   SECTION CARDS
+   ════════════════════ */
+.cardsSection {
+  padding: clamp(60px, 8vw, 96px) 0;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: #0f0f0f;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.card:hover {
+  border-color: #272727;
+  background: #121212;
+}
+
+.cardIcon {
+  color: #c8f135;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f0ede8;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ════════════════════
+   SECTION TIMELINE
+   ════════════════════ */
+.timelineSection {
+  padding: clamp(60px, 8vw, 96px) 0;
+  border-top: 1px solid #111;
+}
+
+.timelineRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: start;
+  gap: 0;
+}
+
+.timelineStep {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 24px;
+}
+
+.timelineStep:last-child {
+  padding-right: 0;
+}
+
+.timelineArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  margin-top: 2px;
+  color: #c8f135;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #c8f135;
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0ede8;
+}
+
+.stepDesc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ════════════════════
+   SECTION FINALE
+   ════════════════════ */
+.finalSection {
+  background: #0f0f0f;
+  border-top: 1px solid #1a1a1a;
+  padding: clamp(60px, 8vw, 96px) 0;
+}
+
+.finalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.finalTitle {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f0ede8;
+}
+
+.finalSub {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  max-width: 380px;
+  margin-top: 10px;
+}
+
+.finalBtn {
+  display: inline-block;
+  background: #c8f135;
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 14px 32px;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.finalBtn:hover { opacity: 0.85; }
+
+/* ════════════════════
+   RESPONSIVE
+   ════════════════════ */
+@media (max-width: 1024px) {
+  .cardsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .heroRow1 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .heroPriceBlock { align-items: flex-start; }
+  .heroRow2 { flex-direction: column; align-items: flex-start; }
+  .heroTitle { white-space: normal; }
+  .cardsGrid { grid-template-columns: 1fr; }
+  .timelineRow {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .timelineArrow { display: none; }
+  .timelineStep { padding-right: 0; }
+  .finalRow { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .cardsGrid { gap: 8px; }
+}
