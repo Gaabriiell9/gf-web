@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProductPage.module.css'
 
@@ -67,12 +67,27 @@ const steps = [
 ]
 
 export default function SiteVitrine() {
+  const pageRef = useRef(null)
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
+  useEffect(() => {
+    const els = pageRef.current?.querySelectorAll('.reveal')
+    if (!els) return
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    )
+    els.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className={styles.page}>
+    <div className={styles.page} ref={pageRef}>
 
       {/* ── 2. INTRO ── */}
       <section className={styles.intro}>
@@ -83,19 +98,15 @@ export default function SiteVitrine() {
             </svg>
             Retour aux tarifs
           </Link>
-          <div className={styles.introGrid}>
-            <div className={styles.introLeft}>
-              <span className={styles.introLabel}>Développement web</span>
-              <h1 className={styles.introTitle}>Site<br />Vitrine</h1>
-              <p className={styles.introTagline}>
-                Une présence en ligne professionnelle, livrée en deux semaines, sans vous prendre la tête.
-              </p>
-            </div>
-            <div className={styles.introRight}>
-              <span className={styles.priceFrom}>À partir de</span>
-              <span className={styles.priceMain}>400€</span>
-              <span className={styles.priceMonthly}>ou 35€/mois avec engagement 1 an</span>
-            </div>
+          <span className={`${styles.introLabel} reveal`}>Développement web</span>
+          <h1 className={`${styles.introTitle} reveal`}>Site<br />Vitrine</h1>
+          <p className={`${styles.introTagline} reveal`}>
+            Une présence en ligne professionnelle, livrée en deux semaines, sans vous prendre la tête.
+          </p>
+          <div className={`${styles.priceRow} reveal`}>
+            <span className={styles.priceFrom}>À partir de</span>
+            <span className={styles.priceMain}>400€</span>
+            <span className={styles.priceMonthly}>ou 35€/mois avec engagement 1 an</span>
           </div>
         </div>
       </section>
@@ -106,13 +117,13 @@ export default function SiteVitrine() {
       {/* ── 4. INCLUS ── */}
       <section className={styles.inclus}>
         <div className={styles.wrap}>
-          <div className={styles.sectionHeader}>
+          <div className={`${styles.sectionHeader} reveal`}>
             <span className={styles.sectionLabel}>Ce que vous obtenez</span>
             <h2 className={styles.sectionTitle}>Inclus dans cette formule</h2>
           </div>
           <div className={styles.cardsGrid}>
             {cards.map((c) => (
-              <div key={c.title} className={styles.card}>
+              <div key={c.title} className={`${styles.card} reveal`}>
                 <span className={styles.cardIcon} style={{ color: '#c8f135' }}>{c.icon}</span>
                 <p className={styles.cardTitle}>{c.title}</p>
                 <p className={styles.cardDesc}>{c.desc}</p>
@@ -125,13 +136,13 @@ export default function SiteVitrine() {
       {/* ── 5. TIMELINE ── */}
       <section className={styles.timeline}>
         <div className={styles.wrap}>
-          <div className={styles.sectionHeader}>
+          <div className={`${styles.sectionHeader} reveal`}>
             <span className={styles.sectionLabel}>Déroulement</span>
             <h2 className={styles.sectionTitle}>Comment ça se passe ?</h2>
           </div>
           <div className={styles.timelineSteps}>
             {steps.map((s) => (
-              <div key={s.num} className={styles.timelineStep}>
+              <div key={s.num} className={`${styles.timelineStep} reveal`}>
                 <span className={styles.timelineNum}>{s.num}</span>
                 <p className={styles.timelineTitle}>{s.title}</p>
                 <p className={styles.timelineDesc}>{s.desc}</p>
@@ -144,7 +155,7 @@ export default function SiteVitrine() {
       {/* ── 6. BLOC FINAL ── */}
       <section className={styles.finalBlock}>
         <div className={styles.wrap}>
-          <div className={styles.finalInner}>
+          <div className={`${styles.finalInner} reveal`}>
             <h2 className={styles.finalTitle}>Une question ?<br />Parlons-en.</h2>
             <p className={styles.finalSub}>
               Décrivez votre projet en quelques lignes. Je vous réponds sous 24h avec un devis gratuit et sans engagement.
