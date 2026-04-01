@@ -46,7 +46,7 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!form.rating || form.message.length < 20) return
+    if (!form.rating) return
     setStatus('loading')
     try {
       const { error } = await supabase.from('reviews').insert({
@@ -111,7 +111,7 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
                 <label>Votre activité / entreprise</label>
                 <input
                   type="text"
-                  placeholder="Électricien, Bordeaux"
+                  placeholder=""
                   value={form.role}
                   onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))}
                   required
@@ -122,13 +122,12 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
                 <StarRating value={form.rating} onChange={(v) => setForm((f) => ({ ...f, rating: v }))} />
               </div>
               <div className={styles.field}>
-                <label>Votre avis (minimum 20 caractères)</label>
+                <label>Votre avis</label>
                 <textarea
                   rows={4}
                   placeholder="Décrivez votre expérience..."
                   value={form.message}
                   onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                  minLength={20}
                   required
                 />
               </div>
@@ -138,7 +137,7 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
               <button
                 type="submit"
                 className={styles.submitBtn}
-                disabled={status === 'loading' || !form.rating || form.message.length < 20}
+                disabled={status === 'loading' || !form.rating}
               >
                 {status === 'loading' ? 'Envoi...' : 'Envoyer mon avis'}
               </button>
