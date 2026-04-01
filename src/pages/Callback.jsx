@@ -5,7 +5,8 @@ export default function Callback() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN') && session) {
-        window.location.href = '/#avis'
+        sessionStorage.setItem('scrollToAvis', '1')
+        window.location.href = '/'
       }
     })
     return () => subscription.unsubscribe()

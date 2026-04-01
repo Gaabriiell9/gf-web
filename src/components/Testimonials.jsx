@@ -159,6 +159,15 @@ export default function Testimonials() {
   const [authReady, setAuthReady] = useState(false)
 
   useEffect(() => {
+    if (sessionStorage.getItem('scrollToAvis')) {
+      sessionStorage.removeItem('scrollToAvis')
+      setTimeout(() => {
+        document.getElementById('avis')?.scrollIntoView({ behavior: 'smooth' })
+      }, 800)
+    }
+  }, [])
+
+  useEffect(() => {
     const fetchReviews = async () => {
       try {
         const { data, error } = await supabase
