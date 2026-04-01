@@ -79,7 +79,7 @@ export default function Hero() {
 
         <div className={styles.sub}>
           <p>
-            Micro-entreprise basée à Bordeaux. Je conçois et déploie des
+            Société basée à Bordeaux. Je conçois et déploie des
             applications web sur-mesure, du site vitrine au SaaS complet.
           </p>
           <div className={styles.meta}>
