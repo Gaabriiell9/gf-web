@@ -11,10 +11,6 @@ const items = [
     a: 'Oui. Je propose des forfaits de maintenance mensuelle incluant mises à jour, corrections de bugs, sauvegardes et monitoring. Le tarif dépend du type de projet.',
   },
   {
-    q: 'Êtes-vous soumis à la TVA ?',
-    a: "Non. En tant que micro-entreprise sous le régime de franchise en base de TVA, je ne facture pas de TVA. Vos factures sont donc HT = TTC, ce qui représente un avantage direct si vous n'êtes pas assujetti à la TVA.",
-  },
-  {
     q: 'Comment se passe le paiement ?',
     a: "Je demande généralement 30% à 50% d'acompte au démarrage, et le solde à la livraison. Je peux m'adapter selon la nature et la durée du projet.",
   },
