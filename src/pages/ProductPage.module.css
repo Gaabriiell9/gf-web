@@ -23,7 +23,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: #555;
+  color: #888;
   text-decoration: none;
   transition: color 0.2s;
   margin-bottom: 48px;
@@ -95,7 +95,7 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #555;
+  color: #888;
 }
 
 .priceMain {
@@ -111,7 +111,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #555;
+  color: #888;
 }
 
 /* ══════════════════
@@ -139,7 +139,7 @@
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #555;
+  color: #888;
   display: block;
   margin-bottom: 12px;
 }
