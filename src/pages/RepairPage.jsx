@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './RepairPage.module.css'
 
@@ -95,6 +96,10 @@ export default function RepairPage() {
 
   return (
     <div className={styles.page} ref={pageRef}>
+      <Helmet>
+        <title>Réparation PC & Dépannage Informatique à Bordeaux | GF Web</title>
+        <meta name="description" content="Réparation et dépannage PC à Bordeaux. Diagnostic gratuit, suppression virus, réinstallation système, récupération de données. Intervention rapide." />
+      </Helmet>
 
       {/* ── HERO ── */}
       <section className={styles.heroSection}>

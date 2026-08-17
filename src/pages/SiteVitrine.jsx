@@ -1,4 +1,5 @@
 import { useEffect, Fragment } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './EditorialPage.module.css'
 
@@ -73,6 +74,10 @@ export default function SiteVitrine() {
 
   return (
     <div className={styles.page}>
+      <Helmet>
+        <title>Création Site Vitrine à Bordeaux · À partir de 400€ | GF Web</title>
+        <meta name="description" content="Création de site vitrine professionnel à Bordeaux. Design sur-mesure, responsive, SEO optimisé. Livré en 2 semaines. Devis gratuit sous 24h." />
+      </Helmet>
       <div className={styles.wrap}>
 
         {/* ── BACK ── */}

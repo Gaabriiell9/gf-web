@@ -1,4 +1,5 @@
 import { useEffect, Fragment } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './EditorialPage.module.css'
 
@@ -75,6 +76,10 @@ export default function ApplicationWeb() {
 
   return (
     <div className={styles.page}>
+      <Helmet>
+        <title>Développement Application Web sur-mesure · À partir de 900€ | GF Web</title>
+        <meta name="description" content="Développement d'applications web sur-mesure à Bordeaux. SaaS, espace membres, paiement en ligne, tableau de bord. Devis gratuit sous 24h." />
+      </Helmet>
       <div className={styles.wrap}>
 
         {/* ── BACK ── */}

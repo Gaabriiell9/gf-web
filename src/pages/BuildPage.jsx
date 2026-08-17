@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './BuildPage.module.css'
 
@@ -98,6 +99,10 @@ export default function BuildPage() {
 
   return (
     <div className={styles.page} ref={pageRef}>
+      <Helmet>
+        <title>Montage PC sur-mesure à Bordeaux · Gaming, Workstation, Serveur | GF Web</title>
+        <meta name="description" content="Montage PC sur-mesure à Bordeaux. Configurations gaming, workstation et home server. Sélection composants, assemblage soigné, tests inclus. Devis gratuit." />
+      </Helmet>
 
       {/* ── HERO ── */}
       <section className={styles.heroSection}>

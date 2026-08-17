@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './About.module.css'
 
@@ -86,6 +87,10 @@ export default function About() {
 
   return (
     <div className={styles.page} ref={pageRef}>
+      <Helmet>
+        <title>À propos · Gabriel Farias, Développeur Web Freelance à Bordeaux | GF Web</title>
+        <meta name="description" content="Développeur web freelance à Bordeaux. Passionné d'informatique, cybersécurité et hardware. Parcours, compétences et informations sur GF Web." />
+      </Helmet>
 
       <Link to="/" className={styles.backBtn}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
