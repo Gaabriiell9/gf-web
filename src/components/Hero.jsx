@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { gsap, prefersReducedMotion } from '../lib/motion'
 import { useGsap } from '../hooks/useGsap'
 import { MagneticLink, ArrowRight } from './ui'
+import HeroDepth from './HeroDepth'
 import s from './Hero.module.css'
 
 const Block = ({ className = '', label, children }) => (
@@ -45,9 +46,24 @@ export default function Hero() {
       .to(q('[data-toast]'), { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 3.85)
       .to(q('[data-cursor]'), { opacity: 0, duration: 0.4 }, 4.6)
 
+    // la maquette s'incline légèrement selon la souris (profondeur)
+    const stage = q('[data-tilt]')[0]
+    let cleanup = () => {}
+    if (stage && !reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const rx = gsap.quickTo(stage, 'rotationX', { duration: 1, ease: 'power3.out' })
+      const ry = gsap.quickTo(stage, 'rotationY', { duration: 1, ease: 'power3.out' })
+      const onMove = (e) => {
+        rx(-(e.clientY / window.innerHeight - 0.5) * 8)
+        ry((e.clientX / window.innerWidth - 0.5) * 10)
+      }
+      window.addEventListener('pointermove', onMove, { passive: true })
+      cleanup = () => window.removeEventListener('pointermove', onMove)
+    }
+
     tl.current = build
     if (reduced) build.progress(1)
     else gsap.delayedCall(0.7, () => build.play())
+    return cleanup
   }, root)
 
   const replay = () => {
@@ -57,6 +73,7 @@ export default function Hero() {
 
   return (
     <section className={s.hero} ref={root} id="top">
+      <HeroDepth />
       <div className={`wrap ${s.grid}`}>
         <div className={s.copy}>
           <p className={s.status} data-fade>
@@ -64,9 +81,8 @@ export default function Hero() {
             Disponible pour un nouveau projet, réponse sous 24 h
           </p>
           <h1 className={`display ${s.title}`}>
-            <span className="line-mask"><span className="line-inner" data-line>Du plan</span></span>
-            <span className="line-mask"><span className="line-inner" data-line>au site</span></span>
-            <span className="line-mask"><span className="line-inner" data-line>en ligne.</span></span>
+            <span className="line-mask"><span className="line-inner" data-line>Développeur</span></span>
+            <span className="line-mask"><span className="line-inner" data-line>web.</span></span>
           </h1>
           <p className={`lead ${s.lead}`} data-fade>
             Je suis Gabriel, développeur web indépendant à Bordeaux. Je conçois et je construis
@@ -80,7 +96,7 @@ export default function Hero() {
         </div>
 
         <div className={s.stageWrap} data-fade>
-          <div className={`${s.stage} blueprint`}>
+          <div className={`${s.stage} blueprint`} data-tilt>
             <span className={`${s.rule} ${s.ruleTop}`} data-rule aria-hidden="true"><em>1 200 px</em></span>
             <span className={`${s.rule} ${s.ruleSide}`} data-rule aria-hidden="true"><em>mobile, tablette, ordinateur</em></span>
 

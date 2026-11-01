@@ -59,6 +59,8 @@ body {
 }
 
 body.menu-open { overflow: hidden; }
+html { background: var(--night); }
+.shell { background: var(--paper); }
 
 ::selection { background: var(--signal); color: var(--ink); }
 

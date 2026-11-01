@@ -1,0 +1,22 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  pointer-events: none;
+  padding: 0 var(--gutter);
+  border-radius: 40px 40px 0 0;
+}
+.mask { overflow: hidden; display: block; padding: 0.1em 0; }
+.label {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-stretch: 75%;
+  font-size: clamp(3rem, 1rem + 8vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.012em;
+  text-align: center;
+}
