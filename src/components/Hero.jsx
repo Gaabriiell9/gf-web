@@ -87,10 +87,6 @@ export default function Hero() {
               <span className={styles.label}>Domaine</span>
               gf-web.fr
             </span>
-            <span>
-              <span className={styles.label}>Siret</span>
-              10303012800013
-            </span>
           </div>
         </div>
         <div className={styles.actions}>

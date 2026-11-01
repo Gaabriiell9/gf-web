@@ -60,7 +60,6 @@ const passions = [
 const companyInfo = [
   { label: 'Nom commercial', value: 'GF WEB' },
   { label: 'Forme juridique', value: 'Entrepreneur individuel' },
-  { label: 'SIRET', value: '10303012800013' },
   { label: 'Localisation', value: 'Bègles, 33130, France' },
   { label: 'Email', value: 'joaofarias20@icloud.com', href: 'mailto:joaofarias20@icloud.com' },
 ]

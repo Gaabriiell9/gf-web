@@ -21,7 +21,6 @@ export default function Footer() {
 
           <div className={styles.col}>
             <span className={styles.colLabel}>Légal</span>
-            <span>SIRET 10303012800013</span>
             <span>Auto-entrepreneur</span>
             <span>Micro-entreprise BNC</span>
             <a href="/mentions-legales">Mentions légales</a>

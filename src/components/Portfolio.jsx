@@ -13,13 +13,13 @@ const projects = [
     accent: '#e8a040',
   },
   {
-    name: 'AD Logos',
-    url: 'https://adlogos.org',
-    slug: 'adlogos.org',
-    type: 'Site institutionnel',
+    name: 'CV Pro',
+    url: 'https://cv-pro.gf-web.fr',
+    slug: 'cv-pro.gf-web.fr',
+    type: 'SaaS',
     description:
-      "Site pour l'Assemblée de Dieu Logos à Bordeaux.",
-    stack: ['React', 'Vite', 'React Router'],
+      'Générateur de CV gratuit : un CV professionnel prêt en quelques minutes, connexion par code e-mail.',
+    stack: ['Next.js', 'Prisma', 'PostgreSQL'],
     accent: '#5b8dee',
   },
   {
