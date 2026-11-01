@@ -48,6 +48,8 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
     e.preventDefault()
     if (!form.rating) return
     setStatus('loading')
+    // Filet de sécurité : le bouton ne doit jamais rester bloqué sur "Envoi..."
+    const watchdog = setTimeout(() => setStatus((s) => (s === 'loading' ? 'error' : s)), 15000)
     try {
       const { error } = await supabase.from('reviews').insert({
         user_id: user.id,
@@ -72,6 +74,8 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
     } catch (err) {
       console.error(err)
       setStatus('error')
+    } finally {
+      clearTimeout(watchdog)
     }
   }
 
@@ -156,6 +160,22 @@ export default function Testimonials() {
   const [formOpen, setFormOpen] = useState(false)
   const [alreadyReviewed, setAlreadyReviewed] = useState(false)
   const [authReady, setAuthReady] = useState(false)
+  const [authError, setAuthError] = useState(false)
+
+  useEffect(() => {
+    // Erreur OAuth : soit transmise par /callback, soit renvoyée directement sur la page (?error=...)
+    const params = new URLSearchParams(window.location.search)
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''))
+    if (params.get('error') || hash.get('error')) {
+      setAuthError(true)
+      sessionStorage.setItem('scrollToAvis', '1')
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+    if (sessionStorage.getItem('authError')) {
+      sessionStorage.removeItem('authError')
+      setAuthError(true)
+    }
+  }, [])
 
   useEffect(() => {
     if (sessionStorage.getItem('scrollToAvis')) {
@@ -186,15 +206,20 @@ export default function Testimonials() {
   }, [])
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('[OAuth] onAuthStateChange -', event, '| user:', session?.user?.email ?? 'null')
+    // IMPORTANT : ce callback doit rester synchrone. Un `await supabase...` ici
+    // garde le verrou d'auth de supabase-js et bloque toutes les requêtes suivantes
+    // (dont l'insert de l'avis, d'où le "Envoi..." infini).
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
 
       if ((event === 'INITIAL_SESSION' || event === 'SIGNED_IN') && session?.user) {
-        const { data: existing } = await supabase
-          .from('reviews').select('id').eq('user_id', session.user.id).single()
-        setAlreadyReviewed(!!existing)
-        setAuthReady(true)
+        const userId = session.user.id
+        setTimeout(async () => {
+          const { data: existing } = await supabase
+            .from('reviews').select('id').eq('user_id', userId).maybeSingle()
+          setAlreadyReviewed(!!existing)
+          setAuthReady(true)
+        }, 0)
       }
 
       if (event === 'INITIAL_SESSION' && !session?.user) {
@@ -212,6 +237,7 @@ export default function Testimonials() {
   }, [])
 
   const signInWithGoogle = async () => {
+    setAuthError(false)
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: 'https://gf-web.fr/callback' },
@@ -281,10 +307,15 @@ export default function Testimonials() {
               Vous avez travaillé avec moi ? Partagez votre expérience en quelques secondes.
             </p>
             {authReady && !user && (
-              <button className={styles.googleBtn} onClick={signInWithGoogle}>
-                <GoogleIcon />
-                Laisser un avis avec Google
-              </button>
+              <>
+                {authError && (
+                  <p className={styles.errorMsg}>La connexion Google a échoué ou a expiré. Réessayez.</p>
+                )}
+                <button className={styles.googleBtn} onClick={signInWithGoogle}>
+                  <GoogleIcon />
+                  Laisser un avis avec Google
+                </button>
+              </>
             )}
             {authReady && user && (
               <div className={styles.emptyFormArea}>
@@ -305,10 +336,15 @@ export default function Testimonials() {
         {!loading && reviews.length > 0 && authReady && (
           <div className={styles.formArea}>
             {!user ? (
-              <button className={styles.googleBtn} onClick={signInWithGoogle}>
-                <GoogleIcon />
-                Laisser un avis avec Google
-              </button>
+              <>
+                {authError && (
+                  <p className={styles.errorMsg}>La connexion Google a échoué ou a expiré. Réessayez.</p>
+                )}
+                <button className={styles.googleBtn} onClick={signInWithGoogle}>
+                  <GoogleIcon />
+                  Laisser un avis avec Google
+                </button>
+              </>
             ) : (
               <ReviewForm
                 user={user}
