@@ -48,6 +48,28 @@ export const projects = [
     tint: '#FBF1EE',
   },
   {
+    slug: 'temple-de-la-celebration',
+    name: 'Temple de la Célébration',
+    url: 'https://siteweb-isaie.vercel.app',
+    domain: 'siteweb-isaie.vercel.app',
+    type: 'Site et plateforme',
+    client: 'Église, cultes et formation en ligne',
+    summary: 'Site d’église avec cultes en direct, prédications, dons et une formation théologique en ligne avec espace élève.',
+    context:
+      'Une église qui diffuse ses cultes en ligne et forme ses fidèles à distance avait besoin d’un seul endroit pour tout réunir : le direct du dimanche, les prédications, la prière quotidienne et une formation théologique payante avec le suivi de chaque élève.',
+    built: [
+      { title: 'Cultes en direct', desc: 'Lecteur YouTube intégré, statut en direct, à venir ou terminé calculé à l’heure près, et un bandeau qui annonce le prochain culte sur tout le site.' },
+      { title: 'Formation théologique avec espace élève', desc: 'Inscription en ligne, paiement intégral ou en plusieurs fois, compte créé seulement une fois le paiement confirmé, modules débloqués au fil de la formation.' },
+      { title: 'Dons en ligne', desc: 'Un formulaire simple, montant libre, paiement sécurisé par carte.' },
+      { title: 'Administration complète', desc: 'Vidéos, prédications, messages de prière, cultes, élèves et formules de paiement se gèrent depuis un seul panneau, sans toucher au code.' },
+    ],
+    stack: ['React', 'Supabase', 'Stripe', 'Vercel'],
+    mock: 'sena',
+    image: '/projets/isaie.jpg',
+    accent: '#C89B4A',
+    tint: '#14110E',
+  },
+  {
     slug: 'quickdevis-pro',
     name: 'QuickDevis Pro',
     url: 'https://quickdevis.gf-web.fr',
