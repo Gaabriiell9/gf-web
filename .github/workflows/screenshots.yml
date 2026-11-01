@@ -3,9 +3,9 @@ name: Captures des projets
 on:
   workflow_dispatch:
   push:
+    branches: [refonte-v3]
     paths:
       - scripts/screenshots.mjs
-      - .github/workflows/screenshots.yml
 
 permissions:
   contents: write
@@ -24,8 +24,6 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Capturer les sites
         run: node scripts/screenshots.mjs
-        env:
-          SITES: quickdevis
       - name: Enregistrer les images
         run: |
           git config user.name "github-actions[bot]"

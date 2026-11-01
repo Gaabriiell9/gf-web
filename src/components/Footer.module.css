@@ -4,15 +4,9 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: 56px 80px;
 }
-.pitchText {
-  font-weight: 700;
-  font-stretch: 78%;
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.6rem);
-  line-height: 1;
-  letter-spacing: -0.025em;
-  max-width: 14ch;
-  margin-bottom: 32px;
-}
+.brand { display: inline-flex; font-size: 1.15rem; }
+.brand > span > span:first-child { background: var(--blue); }
+.pitchText { margin-top: 20px; color: var(--on-blue-2); max-width: 34ch; }
 .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .colTitle { color: var(--on-blue-2); margin-bottom: 16px; font-size: 0.95rem; }
 .cols ul { list-style: none; display: grid; gap: 10px; }

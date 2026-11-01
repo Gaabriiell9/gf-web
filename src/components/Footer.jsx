@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { site, nav } from '../data/site'
 import { SmartLink } from './ui'
+import { Logo } from './Navbar'
 import s from './Footer.module.css'
 
 export default function Footer() {
@@ -9,8 +10,8 @@ export default function Footer() {
     <footer className={`on-night ${s.footer}`}>
       <div className={`wrap ${s.top}`}>
         <div className={s.pitch}>
-          <p className={s.pitchText}>Un projet en tête ? On en parle quand vous voulez.</p>
-          <SmartLink to="/#contact" className="btn btn-signal">Demander un devis</SmartLink>
+          <Link to="/" className={s.brand} aria-label="GF Web, accueil"><Logo /></Link>
+          <p className={s.pitchText}>Sites, boutiques et applications web pour les artisans, commerces et associations. Basé à Bordeaux.</p>
         </div>
         <div className={s.cols}>
           <div>
