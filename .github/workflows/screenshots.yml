@@ -3,7 +3,7 @@ name: Captures des projets
 on:
   workflow_dispatch:
   push:
-    branches: [refonte-v3]
+    branches: [main]
     paths:
       - scripts/screenshots.mjs
 

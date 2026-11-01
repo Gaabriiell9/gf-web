@@ -8,6 +8,7 @@ const all = [
   ['susymodas', 'https://susymodas.com'],
   ['quickdevis', 'https://quickdevis.gf-web.fr'],
   ['cvpro', 'https://cv-pro.gf-web.fr'],
+  ['isaie', 'https://siteweb-isaie.vercel.app'],
 ]
 // SITES=quickdevis,cvpro pour ne refaire que certaines captures
 const only = (process.env.SITES || '').split(',').filter(Boolean)
