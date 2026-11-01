@@ -69,7 +69,7 @@ export const services = [
 export const steps = [
   {
     title: 'On échange',
-    desc: 'Vous me parlez de votre activité et de vos attentes. Je vous envoie un devis gratuit et détaillé sous 24 h.',
+    desc: 'Vous me parlez de votre activité et de vos attentes. Je vous envoie un devis gratuit et détaillé sous 24 h.',
   },
   {
     title: 'Je conçois',

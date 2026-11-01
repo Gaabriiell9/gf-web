@@ -36,7 +36,7 @@
 @keyframes ping { 0% { transform: scale(0.5); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
 
 .title { color: var(--ink); }
-.title :global(.line-mask):last-child :global(.line-inner) { color: var(--cobalt); }
+.title :global(.line-mask):last-child :global(.line-inner) { color: var(--blue); }
 
 .lead { margin-top: clamp(24px, 3vw, 36px); max-width: 34ch; }
 
@@ -51,7 +51,7 @@
   border-radius: var(--r-l);
   padding: 9cqw 7cqw 11cqw;
   overflow: hidden;
-  box-shadow: 0 40px 80px -40px rgba(10, 26, 143, 0.6);
+  box-shadow: 0 40px 80px -40px rgba(11, 23, 64, 0.55);
 }
 
 .rule {
@@ -144,10 +144,10 @@
 .photo .fill {
   overflow: hidden;
   min-height: 15em;
-  background: linear-gradient(180deg, #CFE0FF, #F1F5FF);
+  background: linear-gradient(180deg, #D6E0F7, #F3F6FC);
 }
 .sun { position: absolute; top: 18%; right: 20%; width: 3.2em; height: 3.2em; border-radius: 50%; background: var(--signal); }
-.hill { position: absolute; left: -10%; right: 20%; bottom: -30%; height: 70%; border-radius: 50%; background: #3B56FF; }
+.hill { position: absolute; left: -10%; right: 20%; bottom: -30%; height: 70%; border-radius: 50%; background: #4A63C9; }
 .hill2 { position: absolute; left: 35%; right: -20%; bottom: -40%; height: 70%; border-radius: 50%; background: var(--night); }
 
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4em; }

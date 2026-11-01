@@ -141,7 +141,7 @@ export default function About() {
         </div>
       </section>
 
-      <PageCta title="Travaillons ensemble." sub="Un projet, une question, un devis ? Je vous réponds sous 24 h." label="Me contacter" />
+      <PageCta title="Travaillons ensemble." sub="Un projet, une question, un devis ? Je vous réponds sous 24 h." label="Me contacter" />
     </div>
   )
 }

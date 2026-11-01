@@ -9,7 +9,7 @@ export default function Faq() {
       <div className={`wrap ${s.grid}`}>
         <div>
           <h2 id="faq-titre" className="h2">Vos questions</h2>
-          <p className={`lead ${s.lead}`}>Une autre question ? Écrivez-moi, je réponds sous 24 h.</p>
+          <p className={`lead ${s.lead}`}>Une autre question ? Écrivez-moi, je réponds sous 24 h.</p>
         </div>
         <div className={s.list}>
           {faq.map((it, i) => {

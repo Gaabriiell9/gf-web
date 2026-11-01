@@ -1,6 +1,6 @@
 // Projets présentés sur le site.
-// Pour afficher une vraie capture à la place de la maquette dessinée,
-// déposer l'image dans /public/projets/ et renseigner `image` (ex : '/projets/senaelec.webp').
+// `image` : capture réelle de la page d'accueil (générée par scripts/screenshots.mjs via GitHub Actions).
+// Sans `image`, une maquette dessinée (`mock`) est affichée à la place.
 
 export const projects = [
   {
@@ -21,6 +21,7 @@ export const projects = [
     ],
     stack: ['React', 'Vite', 'CSS', 'Resend', 'Cloudflare', 'Vercel'],
     mock: 'sena',
+    image: '/projets/senaelec.jpg',
     accent: '#E8A040',
     tint: '#1C1A17',
   },
@@ -42,6 +43,7 @@ export const projects = [
     ],
     stack: ['Next.js', 'Supabase', 'Stripe', 'Vercel'],
     mock: 'susy',
+    image: '/projets/susymodas.jpg',
     accent: '#E87A90',
     tint: '#FBF1EE',
   },
@@ -63,6 +65,7 @@ export const projects = [
     ],
     stack: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'Resend'],
     mock: 'quickdevis',
+    image: '/projets/quickdevis.jpg',
     accent: '#2F6BFF',
     tint: '#F2F5FF',
   },
@@ -73,17 +76,18 @@ export const projects = [
     domain: 'cv-pro.gf-web.fr',
     type: 'SaaS',
     client: 'Produit GF Web',
-    summary: 'Générateur de CV gratuit : un CV professionnel prêt en quelques minutes.',
+    summary: 'Générateur de CV gratuit : un beau CV en cinq minutes, sur téléphone comme sur ordinateur.',
     context:
-      'Faire un CV propre ne devrait pas demander un logiciel de mise en page ni un abonnement. CV Pro guide la saisie et produit un document net, gratuitement.',
+      'Faire un CV propre ne devrait demander ni logiciel de mise en page ni abonnement. CV Pro permet de créer un beau CV en cinq minutes, gratuitement.',
     built: [
+      { title: '18 modèles gratuits, sans filigrane', desc: 'Des mises en page variées pour chaque candidature, sans abonnement caché.' },
+      { title: 'Un PDF A4 lisible par les logiciels de recrutement', desc: 'Le CV reste propre une fois imprimé et passe les filtres automatiques des recruteurs.' },
       { title: 'Connexion par code e-mail', desc: 'Pas de mot de passe à retenir : un code arrive par email à chaque connexion.' },
-      { title: 'Saisie guidée', desc: 'Expériences, formations, compétences : chaque section est pensée pour aller vite.' },
-      { title: 'Un CV prêt en quelques minutes', desc: 'Une mise en page professionnelle appliquée automatiquement.' },
-      { title: 'Gratuit', desc: 'Aucune carte bancaire, aucune limite cachée.' },
+      { title: 'Sur téléphone comme sur ordinateur', desc: 'Le CV est enregistré dans le compte et se retrouve sur tous les appareils.' },
     ],
     stack: ['Next.js', 'Prisma', 'PostgreSQL', 'Vercel'],
     mock: 'cvpro',
+    image: '/projets/cvpro.jpg',
     accent: '#5B8DEE',
     tint: '#EEF3FD',
   },

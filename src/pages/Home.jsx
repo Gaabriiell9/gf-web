@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>GF Web · Développeur web et informatique à Bordeaux</title>
-        <meta name="description" content="Développeur web freelance à Bordeaux. Création de sites vitrines, boutiques et applications web, réparation et montage PC. Devis gratuit sous 24h." />
+        <meta name="description" content="Développeur web freelance à Bordeaux. Création de sites vitrines, boutiques et applications web, réparation et montage PC. Devis gratuit sous 24 h." />
       </Helmet>
       <Hero />
       <Manifesto />

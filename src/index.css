@@ -9,10 +9,12 @@
   --ink-3: #6B7090;
   --line: rgba(13, 18, 51, 0.12);
   --line-strong: rgba(13, 18, 51, 0.22);
-  --cobalt: #2340FF;
-  --cobalt-2: #1B33D6;
-  --night: #0A1A8F;
-  --night-2: #071266;
+  /* Bleu marine pour les grandes surfaces, bleu roi pour les petits accents */
+  --cobalt: #142A6B;
+  --cobalt-2: #1A3480;
+  --night: #0B1740;
+  --night-2: #08102E;
+  --blue: #2B47C4;
   --signal: #FFD43B;
   --on-blue: #FFFFFF;
   --on-blue-2: rgba(255, 255, 255, 0.74);
@@ -66,7 +68,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 input, select, textarea { font: inherit; color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--cobalt);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -146,10 +148,10 @@ input, select, textarea { font: inherit; color: inherit; }
 .blueprint {
   background-color: var(--cobalt);
   background-image:
-    linear-gradient(var(--on-blue-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--on-blue-line) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
   background-position: -1px -1px;
 }

@@ -61,7 +61,7 @@ export default function Hero() {
         <div className={s.copy}>
           <p className={s.status} data-fade>
             <span className={s.pulse} aria-hidden="true" />
-            Disponible pour un nouveau projet, réponse sous 24 h
+            Disponible pour un nouveau projet, réponse sous 24 h
           </p>
           <h1 className={`display ${s.title}`}>
             <span className="line-mask"><span className="line-inner" data-line>Du plan</span></span>

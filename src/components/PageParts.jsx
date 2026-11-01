@@ -11,10 +11,10 @@ export function PageCta({ title, sub, subject, label = 'Demander un devis' }) {
   return (
     <section className={`${s.ctaBand} blueprint on-blue`}>
       <div className={`wrap ${s.ctaInner}`}>
-        <h2 className="h2">{title}</h2>
-        <div>
+        <h2 className={`h2 ${s.ctaTitle}`}>{title}</h2>
+        <div className={s.ctaRow}>
           <p className="lead">{sub}</p>
-          <Link to={to} className="btn btn-white">{label} <ArrowRight /></Link>
+          <Link to={to} className="btn btn-signal">{label} <ArrowRight /></Link>
         </div>
       </div>
     </section>

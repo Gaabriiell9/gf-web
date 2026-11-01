@@ -2,7 +2,7 @@ export const offers = {
   'site-vitrine': {
     title: 'Site vitrine',
     seoTitle: 'Création site vitrine à Bordeaux, à partir de 400 € | GF Web',
-    seoDesc: 'Création de site vitrine professionnel à Bordeaux. Design sur mesure, responsive, SEO optimisé. Livré en 2 semaines. Devis gratuit sous 24h.',
+    seoDesc: 'Création de site vitrine professionnel à Bordeaux. Design sur mesure, responsive, SEO optimisé. Livré en 2 semaines. Devis gratuit sous 24 h.',
     price: '400 €',
     monthly: 'ou 35 €/mois avec engagement 1 an',
     tagline: 'Une présence en ligne professionnelle, livrée en deux semaines, sans vous prendre la tête.',
@@ -15,7 +15,7 @@ export const offers = {
       { title: 'Formulaire de contact', desc: 'Vos visiteurs vous écrivent directement. Les messages arrivent par mail.' },
     ],
     steps: [
-      { title: 'On échange', desc: 'Vous me parlez de votre activité et de vos attentes. Devis gratuit et personnalisé sous 24h.' },
+      { title: 'On échange', desc: 'Vous me parlez de votre activité et de vos attentes. Devis gratuit et personnalisé sous 24 h.' },
       { title: 'Je conçois', desc: 'Je crée une maquette complète que vous validez avant que le moindre code soit écrit.' },
       { title: 'Votre site est en ligne', desc: 'Je m’occupe de tout : développement, mise en ligne, tests. Vous recevez les clés.' },
     ],
@@ -24,7 +24,7 @@ export const offers = {
   'application-web': {
     title: 'Application web',
     seoTitle: 'Développement application web sur mesure, à partir de 900 € | GF Web',
-    seoDesc: 'Développement d’applications web sur mesure à Bordeaux. SaaS, espace membres, paiement en ligne, tableau de bord. Devis gratuit sous 24h.',
+    seoDesc: 'Développement d’applications web sur mesure à Bordeaux. SaaS, espace membres, paiement en ligne, tableau de bord. Devis gratuit sous 24 h.',
     price: '900 €',
     monthly: 'ou 80 €/mois avec engagement 1 an',
     tagline: 'Un outil numérique taillé pour votre métier, de l’idée à la mise en ligne.',
@@ -37,7 +37,7 @@ export const offers = {
       { title: 'Déploiement inclus', desc: 'Mise en production complète, documentation et suivi post-lancement de 30 jours.' },
     ],
     steps: [
-      { title: 'On analyse', desc: 'On cadre votre besoin, vos utilisateurs et vos priorités. Devis gratuit et détaillé sous 24h.' },
+      { title: 'On analyse', desc: 'On cadre votre besoin, vos utilisateurs et vos priorités. Devis gratuit et détaillé sous 24 h.' },
       { title: 'Je développe', desc: 'Développement par étapes avec démos régulières. Vous suivez et ajustez à tout moment.' },
       { title: 'Votre appli est live', desc: 'Déploiement, tests finaux, formation. Vous êtes autonome dès le premier jour.' },
     ],
@@ -73,7 +73,7 @@ export const repair = {
   ],
   pricingNote: 'TVA non applicable, art. 293 B du CGI. Déplacement à domicile sur Bordeaux et alentours : 10 €.',
   ctaTitle: 'Un problème avec votre machine ?',
-  ctaSub: 'Décrivez votre panne, je reviens vers vous sous 24h avec un diagnostic ou un devis gratuit.',
+  ctaSub: 'Décrivez votre panne, je reviens vers vous sous 24 h avec un diagnostic ou un devis gratuit.',
   subject: 'Réparation PC',
 }
 
@@ -105,6 +105,6 @@ export const build = {
   ],
   pricingNote: 'TVA non applicable. Livraison possible sur Bordeaux et alentours.',
   ctaTitle: 'Votre prochaine configuration ?',
-  ctaSub: 'Décrivez votre projet, votre budget et vos usages : je vous propose une config optimisée sous 48h.',
+  ctaSub: 'Décrivez votre projet, votre budget et vos usages : je vous propose une config optimisée sous 48 h.',
   subject: 'Montage PC',
 }

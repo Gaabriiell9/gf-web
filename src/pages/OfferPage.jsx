@@ -92,7 +92,7 @@ export default function OfferPage({ id }) {
 
       <PageCta
         title="Intéressé ?"
-        sub="Décrivez votre projet en quelques lignes. Je vous réponds sous 24 h avec un devis gratuit et sans engagement."
+        sub="Décrivez votre projet en quelques lignes. Je vous réponds sous 24 h avec un devis gratuit et sans engagement."
         subject={subjects[id]}
       />
     </>

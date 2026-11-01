@@ -49,7 +49,7 @@
 .items { list-style: none; margin: 28px 0 36px; display: grid; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line); }
 .featured .items { border-top-color: var(--on-blue-line); }
 .items li { display: flex; gap: 12px; align-items: flex-start; }
-.check { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--cobalt); }
+.check { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--blue); }
 .featured .check { color: var(--signal); }
 .cta { margin-top: auto; width: 100%; }
 .note { margin-top: 28px; color: var(--ink-3); font-size: 0.92rem; }

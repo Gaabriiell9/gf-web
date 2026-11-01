@@ -34,7 +34,7 @@
   appearance: none;
   resize: vertical;
 }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cobalt); background: var(--white); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); background: var(--white); }
 .selectWrap { position: relative; }
 .selectWrap::after {
   content: ''; position: absolute; right: 18px; top: 50%; width: 8px; height: 8px; margin-top: -6px;

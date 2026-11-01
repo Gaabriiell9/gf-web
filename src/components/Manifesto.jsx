@@ -9,7 +9,7 @@ const text =
 const facts = [
   { k: '2019', v: 'J’écris du code depuis cette année-là, par passion avant d’en faire mon métier.' },
   { k: '4', v: 'projets en ligne aujourd’hui, utilisés par des clients et des visiteurs réels.' },
-  { k: '24 h', v: 'pour recevoir une réponse à votre demande, avec un devis gratuit.' },
+  { k: '24 h', v: 'pour recevoir une réponse à votre demande, avec un devis gratuit.' },
   { k: '0', v: 'template acheté : chaque site est dessiné et codé pour son activité.' },
 ]
 

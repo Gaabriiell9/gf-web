@@ -54,7 +54,7 @@ export default function Contact() {
           <h2 id="contact-titre" className="h1">Parlons de votre projet.</h2>
           <p className={`lead ${s.intro}`}>
             Un site à créer, une boutique à lancer, un ordinateur à réparer ? Décrivez votre besoin,
-            je vous réponds sous 24 h avec un devis gratuit.
+            je vous réponds sous 24 h avec un devis gratuit.
           </p>
           <dl className={s.info}>
             <div>
@@ -79,7 +79,7 @@ export default function Contact() {
                 <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </span>
               <h3>Message envoyé</h3>
-              <p>Merci. Vous recevez une confirmation par email et je vous réponds sous 24 h.</p>
+              <p>Merci. Vous recevez une confirmation par email et je vous réponds sous 24 h.</p>
               <button type="button" onClick={() => setStatus('idle')} className="btn btn-ghost">Écrire un autre message</button>
             </div>
           ) : (

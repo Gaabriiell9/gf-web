@@ -94,16 +94,25 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      <Link to={`/realisations/${next.slug}`} className={s.next}>
-        <div className="wrap">
-          <p className={s.nextLabel}>Projet suivant</p>
-          <p className={s.nextName}>{next.name} <ArrowRight /></p>
+      <section className={s.next} aria-labelledby="projet-suivant">
+        <div className={`wrap ${s.nextGrid}`}>
+          <div>
+            <p className={s.nextLabel} id="projet-suivant">Projet suivant</p>
+            <h2 className={s.nextName}>{next.name}</h2>
+            <p className={s.nextType}>{next.summary}</p>
+            <div className={s.nextActions}>
+              <Link to={`/realisations/${next.slug}`} className="btn btn-ghost">Voir le projet <ArrowRight /></Link>
+            </div>
+          </div>
+          <Link to={`/realisations/${next.slug}`} className={s.nextThumb} tabIndex={-1} aria-hidden="true">
+            <ProjectMock project={next} />
+          </Link>
         </div>
-      </Link>
+      </section>
 
       <PageCta
-        title="Un projet comme celui-ci ?"
-        sub="Parlez-moi de votre activité. Je vous réponds sous 24 h avec un devis gratuit et sans engagement."
+        title="Un projet comme celui‑ci ?"
+        sub="Parlez-moi de votre activité. Je vous réponds sous 24 h avec un devis gratuit et sans engagement."
       />
     </div>
   )
