@@ -1,0 +1,33 @@
+name: Captures des projets
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/screenshots.mjs
+      - .github/workflows/screenshots.yml
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Installer Playwright
+        run: |
+          npm i --no-save playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Capturer les sites
+        run: node scripts/screenshots.mjs
+      - name: Enregistrer les images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add public/projets
+          git diff --cached --quiet || git commit -m "chore: captures des projets [auto]"
+          git push
