@@ -103,11 +103,11 @@ const ReviewForm = ({ user, formOpen, setFormOpen, onSignOut, setReviews, alread
       </div>
 
       {alreadyReviewed ? (
-        <p className={styles.alreadyReviewed}>Vous avez déjà laissé un avis. Merci !</p>
+        <p className={styles.alreadyReviewed}>Vous avez déjà laissé un avis. Merci !</p>
       ) : (
         <>
           <button className={styles.toggleBtn} onClick={() => setFormOpen((v) => !v)}>
-            {formOpen ? '× Fermer' : '+ Laisser un avis'}
+            {formOpen ? 'Fermer le formulaire' : 'Laisser un avis'}
           </button>
           <div className={`${styles.formWrapper} ${formOpen ? styles.open : ''}`}>
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -255,13 +255,13 @@ export default function Testimonials() {
     new Date(dateStr).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
 
   return (
-    <section className={styles.section} id="avis">
-      <div className={styles.inner}>
+    <section className={`section ${styles.section}`} id="avis">
+      <div className="wrap">
 
         {/* ── Header ── */}
         <div className={styles.header}>
-          <p className="section-label">Avis client</p>
-          <h2 className={styles.title}>Ils m'ont fait confiance</h2>
+          <h2 className={`h2 ${styles.title}`}>Ils m’ont fait confiance</h2>
+          <p className="lead">Des avis laissés par de vrais clients, connectés avec leur compte Google.</p>
         </div>
 
         {/* ── Grid / skeleton / empty ── */}
@@ -301,10 +301,10 @@ export default function Testimonials() {
           </div>
         ) : (
           <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>★</div>
-            <p className={styles.emptyTitle}>Aucun avis pour le moment</p>
+            <div className={styles.emptyIcon} aria-hidden="true">★</div>
+            <p className={styles.emptyTitle}>Aucun avis publié pour l’instant</p>
             <p className={styles.emptyText}>
-              Vous avez travaillé avec moi ? Partagez votre expérience en quelques secondes.
+              Vous avez travaillé avec moi ? Partagez votre expérience en quelques secondes avec votre compte Google.
             </p>
             {authReady && !user && (
               <>

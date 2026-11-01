@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
-import styles from './Contact.module.css'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { site } from '../data/site'
+import { ArrowRight } from './ui'
+import s from './Contact.module.css'
 
 const SUBJECTS = [
   'Création de site vitrine',
@@ -12,23 +15,14 @@ const SUBJECTS = [
 ]
 
 export default function Contact() {
-  const sectionRef = useRef(null)
+  const { search } = useLocation()
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | loading | success | error
 
   useEffect(() => {
-    const items = sectionRef.current?.querySelectorAll('.reveal')
-    if (!items) return
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
-        }),
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    )
-    items.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+    const wanted = new URLSearchParams(search).get('sujet')
+    if (wanted && SUBJECTS.includes(wanted)) setForm((f) => ({ ...f, subject: wanted }))
+  }, [search])
 
   const handle = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -54,131 +48,72 @@ export default function Contact() {
   }
 
   return (
-    <section className={styles.section} id="contact" ref={sectionRef}>
-      <div className={styles.inner}>
-        <div className={`${styles.left} reveal`}>
-          <p className="section-label">Contact</p>
-          <h2 className={styles.title}>
-            Travaillons<br />ensemble
-          </h2>
-          <p className={styles.intro}>
-            Un projet en tête ? Une question sur une prestation ?
-            Décrivez votre besoin et je reviens vers vous sous 24h.
+    <section className={`section blueprint on-blue ${s.section}`} id="contact" aria-labelledby="contact-titre">
+      <div className={`wrap ${s.grid}`}>
+        <div className={s.left}>
+          <h2 id="contact-titre" className="h1">Parlons de votre projet.</h2>
+          <p className={`lead ${s.intro}`}>
+            Un site à créer, une boutique à lancer, un ordinateur à réparer ? Décrivez votre besoin,
+            je vous réponds sous 24 h avec un devis gratuit.
           </p>
-          <div className={styles.info}>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Email</span>
-              <a href="mailto:contact@gf-web.fr" className={styles.infoValue}>
-                contact@gf-web.fr
-              </a>
+          <dl className={s.info}>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${site.email}`} className="tlink">{site.email}</a></dd>
             </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Localisation</span>
-              <span className={styles.infoValue}>Bordeaux, France</span>
+            <div>
+              <dt>Basé à</dt>
+              <dd>Bordeaux, et à distance partout en France et DOM-TOM</dd>
             </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Disponibilité</span>
-              <span className={`${styles.infoValue} ${styles.available}`}>
-                <span className={styles.dot} />
-                Disponible
-              </span>
+            <div>
+              <dt>Disponibilité</dt>
+              <dd className={s.available}><span className={s.dot} aria-hidden="true" />Disponible pour un nouveau projet</dd>
             </div>
-          </div>
+          </dl>
         </div>
 
-        <div className={`${styles.right} reveal reveal-delay-2`}>
+        <div className={s.card}>
           {status === 'success' ? (
-            <div className={styles.success}>
-              <div className={styles.successIcon}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
+            <div className={s.success} role="status">
+              <span className={s.successIcon} aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </span>
               <h3>Message envoyé</h3>
-              <p>Je reviendrai vers vous dans les plus brefs délais.</p>
-              <button onClick={() => setStatus('idle')} className={styles.reset}>
-                Envoyer un autre message
-              </button>
+              <p>Merci. Vous recevez une confirmation par email et je vous réponds sous 24 h.</p>
+              <button type="button" onClick={() => setStatus('idle')} className="btn btn-ghost">Écrire un autre message</button>
             </div>
           ) : (
-            <form className={styles.form} onSubmit={submit}>
-              <div className={styles.row}>
-                <div className={styles.field}>
-                  <label htmlFor="name">Nom</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Nom et Prénom"
-                    value={form.name}
-                    onChange={handle}
-                    required
-                  />
+            <form className={s.form} onSubmit={submit} noValidate={false}>
+              <div className={s.row}>
+                <div className={s.field}>
+                  <label htmlFor="name">Nom et prénom</label>
+                  <input id="name" name="name" type="text" autoComplete="name" value={form.name} onChange={handle} required />
                 </div>
-                <div className={styles.field}>
+                <div className={s.field}>
                   <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handle}
-                    required
-                  />
+                  <input id="email" name="email" type="email" autoComplete="email" value={form.email} onChange={handle} required />
                 </div>
               </div>
-
-              <div className={styles.field}>
+              <div className={s.field}>
                 <label htmlFor="subject">Sujet</label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={form.subject}
-                  onChange={handle}
-                  required
-                >
-                  <option value="">Sélectionner un sujet</option>
-                  {SUBJECTS.map((s) => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
+                <div className={s.selectWrap}>
+                  <select id="subject" name="subject" value={form.subject} onChange={handle} required>
+                    <option value="">Choisir un sujet</option>
+                    {SUBJECTS.map((x) => <option key={x} value={x}>{x}</option>)}
+                  </select>
+                </div>
               </div>
-
-              <div className={styles.field}>
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={6}
-                  placeholder="Décrivez votre projet ou votre besoin..."
-                  value={form.message}
-                  onChange={handle}
-                  required
-                />
+              <div className={s.field}>
+                <label htmlFor="message">Votre besoin</label>
+                <textarea id="message" name="message" rows={6} placeholder="Votre activité, ce que vous souhaitez, vos délais..." value={form.message} onChange={handle} required />
               </div>
-
               {status === 'error' && (
-                <p className={styles.error}>
-                  Une erreur est survenue. Réessayez ou contactez-moi directement par email.
+                <p className={s.error} role="alert">
+                  Le message n’est pas parti. Réessayez, ou écrivez directement à {site.email}.
                 </p>
               )}
-
-              <button
-                type="submit"
-                className={styles.submit}
-                disabled={status === 'loading'}
-              >
-                {status === 'loading' ? (
-                  <span className={styles.spinner} />
-                ) : (
-                  <>
-                    Envoyer le message
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </>
-                )}
+              <button type="submit" className={`btn btn-cobalt ${s.submit}`} disabled={status === 'loading'}>
+                {status === 'loading' ? <><span className={s.spinner} aria-hidden="true" />Envoi en cours</> : <>Envoyer le message <ArrowRight /></>}
               </button>
             </form>
           )}

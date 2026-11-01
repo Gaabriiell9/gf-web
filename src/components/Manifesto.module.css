@@ -1,0 +1,41 @@
+.section { background: var(--paper); }
+
+.text {
+  font-weight: 560;
+  font-stretch: 82%;
+  font-size: clamp(1.9rem, 1rem + 3.4vw, 4.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  max-width: 22ch;
+  color: var(--ink);
+}
+.word { display: inline; }
+
+.facts {
+  margin-top: clamp(64px, 9vw, 140px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1.5px solid var(--ink);
+}
+.fact { padding: 24px 24px 0 0; }
+.fact + .fact { padding-left: 24px; border-left: 1px solid var(--line); }
+.fact dt {
+  font-weight: 750;
+  font-stretch: 75%;
+  font-size: clamp(2.6rem, 1.6rem + 2.6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.012em;
+  color: var(--cobalt);
+}
+.fact dd { margin-top: 12px; color: var(--ink-2); max-width: 26ch; font-size: 0.98rem; }
+
+@media (max-width: 900px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); margin-top: 24px; }
+}
+@media (max-width: 520px) {
+  .facts { grid-template-columns: 1fr; }
+  .fact, .fact + .fact { padding: 20px 0 0; border-left: 0; }
+  .fact + .fact { border-top: 1px solid var(--line); margin-top: 20px; }
+}

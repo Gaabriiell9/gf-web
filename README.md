@@ -1,40 +1,22 @@
-# GF Web — Site professionnel
+# GF Web : site professionnel
 
-Site personnel de Joao Gabriel Farias Gomes Franca — GF Web Micro Entreprise.
+Site personnel de Joao Gabriel Farias Gomes Franca, GF Web Micro Entreprise.
 
 ## Stack
 
-- **React 18** + **Vite** — frontend SPA
-- **Vercel Serverless Functions** — API contact (`/api/contact.js`)
-- **Resend** — envoi d'emails transactionnels (gratuit jusqu'à 3000/mois)
-- CSS Modules — styles scopés, zéro dépendance UI
+- **React 18** + **Vite** : SPA, pages secondaires chargées à la demande
+- **GSAP** (ScrollTrigger) + **Lenis** : animations au scroll et défilement fluide, désactivés si l'utilisateur préfère réduire les animations
+- **Bricolage Grotesque** auto-hébergée (`@fontsource-variable`), aucune requête vers Google Fonts
+- **Supabase** : avis clients avec connexion Google
+- **Vercel Serverless Functions** + **Resend** : formulaire de contact (`/api/contact.js`)
+- CSS Modules, aucune librairie UI
 
-## Structure
+## Où modifier le contenu
 
-```
-gf-web/
-├── api/
-│   └── contact.js          # Serverless function Vercel (envoi email)
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx / .module.css
-│   │   ├── Hero.jsx / .module.css
-│   │   ├── Services.jsx / .module.css
-│   │   ├── Portfolio.jsx / .module.css
-│   │   ├── Contact.jsx / .module.css
-│   │   └── Footer.jsx / .module.css
-│   ├── hooks/
-│   │   └── useReveal.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── vite.config.js
-├── vercel.json
-└── package.json
-```
+- Projets et études de cas : `src/data/projects.js` (champ `image` pour remplacer la maquette dessinée par une vraie capture placée dans `public/projets/`)
+- Services, méthode, tarifs, FAQ, coordonnées : `src/data/site.js`
+- Pages offres, réparation et montage PC : `src/data/offers.js`
+- Couleurs et typographie : variables en haut de `src/index.css`
 
 ## Installation locale
 
@@ -76,13 +58,7 @@ CNAME www  cname.vercel-dns.com
 
 ## Configurer Resend (pour le formulaire contact)
 
-1. Créer un compte sur [resend.com](https://resend.com) — plan gratuit suffisant
+1. Créer un compte sur [resend.com](https://resend.com), plan gratuit suffisant
 2. Vérifier le domaine `gf-web.fr` (ajouter les enregistrements DNS fournis)
 3. Créer une API key et l'ajouter dans les env vars Vercel
 
-## Personnalisation
-
-- **Projets** : modifier le tableau `projects` dans `Portfolio.jsx`
-- **Services** : modifier le tableau `services` dans `Services.jsx`
-- **Couleur accent** : changer `--accent: #c8f135` dans `index.css`
-- **Email** : changer `joaofarias20@icloud.com` dans `Contact.jsx` et `Footer.jsx`

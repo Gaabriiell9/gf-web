@@ -1,47 +1,48 @@
-import styles from './Footer.module.css'
+import { Link } from 'react-router-dom'
+import { site, nav } from '../data/site'
+import { SmartLink } from './ui'
+import s from './Footer.module.css'
 
 export default function Footer() {
   const year = new Date().getFullYear()
-
   return (
-    <footer className={styles.footer}>
-      <div className={styles.inner}>
-        <div className={styles.top}>
-          <div className={styles.brand}>
-            <span className={styles.logo}>GF<span className={styles.dot}>.</span></span>
-            <p>Développement web & conseil en systèmes informatiques.</p>
+    <footer className={`on-night ${s.footer}`}>
+      <div className={`wrap ${s.top}`}>
+        <div className={s.pitch}>
+          <p className={s.pitchText}>Un projet en tête ? On en parle quand vous voulez.</p>
+          <SmartLink to="/#contact" className="btn btn-signal">Demander un devis</SmartLink>
+        </div>
+        <div className={s.cols}>
+          <div>
+            <p className={s.colTitle}>Navigation</p>
+            <ul>
+              {nav.map((l) => <li key={l.to}><SmartLink to={l.to}>{l.label}</SmartLink></li>)}
+              <li><SmartLink to="/#contact">Contact</SmartLink></li>
+            </ul>
           </div>
-
-          <div className={styles.col}>
-            <span className={styles.colLabel}>Navigation</span>
-            <a href="#services">Services</a>
-            <a href="#realisations">Réalisations</a>
-            <a href="#contact">Contact</a>
+          <div>
+            <p className={s.colTitle}>Offres</p>
+            <ul>
+              <li><Link to="/site-vitrine">Site vitrine</Link></li>
+              <li><Link to="/application-web">Application web</Link></li>
+              <li><Link to="/reparation-pc">Réparation PC</Link></li>
+              <li><Link to="/montage-pc">Montage PC</Link></li>
+            </ul>
           </div>
-
-          <div className={styles.col}>
-            <span className={styles.colLabel}>Légal</span>
-            <span>Auto-entrepreneur</span>
-            <span>Micro-entreprise BNC</span>
-            <a href="/mentions-legales">Mentions légales</a>
-          </div>
-
-          <div className={styles.col}>
-            <span className={styles.colLabel}>Contact</span>
-            <a href="mailto:joaofarias20@icloud.com">joaofarias20@icloud.com</a>
-            <span>Bordeaux, France</span>
-            <span>gf-web.fr</span>
+          <div>
+            <p className={s.colTitle}>Contact</p>
+            <ul>
+              <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+              <li>Bordeaux, France</li>
+              <li><Link to="/mentions-legales">Mentions légales</Link></li>
+            </ul>
           </div>
         </div>
-
-        <div className={styles.bottom}>
-          <span className={styles.copy}>
-            © {year} GF Web · Joao Gabriel Farias Gomes Franca
-          </span>
-          <span className={styles.made}>
-            Conçu & développé à Bordeaux
-          </span>
-        </div>
+      </div>
+      <div className={s.word} aria-hidden="true">GF Web</div>
+      <div className={`wrap ${s.bottom}`}>
+        <span>© {year} GF Web, {site.owner}. Micro-entreprise.</span>
+        <span>Conçu et développé à Bordeaux.</span>
       </div>
     </footer>
   )
