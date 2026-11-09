@@ -15,27 +15,35 @@ const only = (process.env.SITES || '').split(',').filter(Boolean)
 const sites = only.length ? all.filter(([n]) => only.includes(n)) : all
 
 await mkdir('public/projets', { recursive: true })
+const formats = [
+  ['', { width: 1600, height: 1000 }, 1.5, false],
+  ['-tablette', { width: 820, height: 1180 }, 1.5, true],
+  ['-mobile', { width: 390, height: 844 }, 2, true],
+]
+
 const browser = await chromium.launch()
 for (const [name, url] of sites) {
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1000 }, deviceScaleFactor: 1.5, locale: 'fr-FR' })
-  try {
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 })
-    await page.waitForTimeout(2500)
-    // bandeau cookies : on accepte pour qu'il ne masque pas la page
-    for (const label of ['Tout accepter', 'Accepter tout', "J'accepte"]) {
-      const b = page.getByRole('button', { name: label, exact: true }).first()
-      if (await b.isVisible().catch(() => false)) { await b.click().catch(() => {}); break }
+  for (const [suffix, viewport, dpr, mobile] of formats) {
+    const page = await browser.newPage({ viewport, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile, locale: 'fr-FR' })
+    try {
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 })
+      await page.waitForTimeout(2500)
+      // bandeau cookies : on accepte pour qu'il ne masque pas la page
+      for (const label of ['Tout accepter', 'Accepter tout', "J'accepte"]) {
+        const b = page.getByRole('button', { name: label, exact: true }).first()
+        if (await b.isVisible().catch(() => false)) { await b.click().catch(() => {}); break }
+      }
+      await page.addStyleTag({ content: '::-webkit-scrollbar{display:none}' })
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await page.waitForTimeout(2500)
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await page.waitForTimeout(800)
+      await page.screenshot({ path: `public/projets/${name}${suffix}.jpg`, type: 'jpeg', quality: 78 })
+      console.log('ok', name + suffix)
+    } catch (e) {
+      console.log('ERREUR', name + suffix, e.message)
     }
-    await page.addStyleTag({ content: '::-webkit-scrollbar{display:none}' })
-    await page.evaluate(() => window.scrollTo(0, 0))
-    await page.waitForTimeout(2500)
-    await page.evaluate(() => window.scrollTo(0, 0))
-    await page.waitForTimeout(800)
-    await page.screenshot({ path: `public/projets/${name}.jpg`, type: 'jpeg', quality: 78 })
-    console.log('ok', name, page.url())
-  } catch (e) {
-    console.log('ERREUR', name, e.message)
+    await page.close()
   }
-  await page.close()
 }
 await browser.close()
