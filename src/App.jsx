@@ -1,7 +1,6 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import PageTransition from './components/PageTransition'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import { lazy, Suspense } from 'react'
@@ -45,14 +44,12 @@ function ScrollManager() {
 
 export default function App() {
   const { pathname } = useLocation()
-  const shell = useRef(null)
   return (
     <>
       <a href="#contenu" className="skip-link">Aller au contenu</a>
       <ScrollManager />
       <Navbar />
-      <PageTransition shellRef={shell} />
-      <div ref={shell} className="shell">
+      <div className="shell">
       <main id="contenu" key={pathname}>
         <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
         <Routes>
