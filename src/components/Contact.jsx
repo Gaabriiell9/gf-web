@@ -5,12 +5,10 @@ import { ArrowRight } from './ui'
 import s from './Contact.module.css'
 
 const SUBJECTS = [
-  'Création de site vitrine',
-  'Application web / SaaS',
-  'E-commerce',
-  'Réparation PC',
+  'Site vitrine',
+  'Boutique en ligne',
+  'Application web',
   'Montage PC',
-  'Maintenance & support',
   'Autre',
 ]
 
@@ -48,13 +46,14 @@ export default function Contact() {
   }
 
   return (
-    <section className={`section blueprint on-blue ${s.section}`} id="contact" aria-labelledby="contact-titre">
+    <section className="section" id="contact" aria-labelledby="contact-titre">
       <div className={`wrap ${s.grid}`}>
         <div className={s.left}>
-          <h2 id="contact-titre" className="h1">Parlons de votre projet.</h2>
+          <p className="kicker">CONTACT</p>
+          <h2 id="contact-titre" className="h2">Parlons de votre projet</h2>
           <p className={`lead ${s.intro}`}>
-            Un site à créer, une boutique à lancer, un ordinateur à réparer ? Décrivez votre besoin,
-            je vous réponds sous 24 h avec un devis gratuit.
+            Un site à créer, une boutique à lancer, un PC à monter ? Décrivez votre besoin,
+            je vous réponds rapidement.
           </p>
           <dl className={s.info}>
             <div>
@@ -79,8 +78,8 @@ export default function Contact() {
                 <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </span>
               <h3>Message envoyé</h3>
-              <p>Merci. Vous recevez une confirmation par email et je vous réponds sous 24 h.</p>
-              <button type="button" onClick={() => setStatus('idle')} className="btn btn-ghost">Écrire un autre message</button>
+              <p>Merci. Vous recevez une confirmation par email et je vous réponds rapidement.</p>
+              <button type="button" onClick={() => setStatus('idle')} className="btn btn-outline">Écrire un autre message</button>
             </div>
           ) : (
             <form className={s.form} onSubmit={submit} noValidate={false}>
@@ -112,7 +111,7 @@ export default function Contact() {
                   Le message n’est pas parti. Réessayez, ou écrivez directement à {site.email}.
                 </p>
               )}
-              <button type="submit" className={`btn btn-cobalt ${s.submit}`} disabled={status === 'loading'}>
+              <button type="submit" className={`btn ${s.submit}`} disabled={status === 'loading'}>
                 {status === 'loading' ? <><span className={s.spinner} aria-hidden="true" />Envoi en cours</> : <>Envoyer le message <ArrowRight /></>}
               </button>
             </form>

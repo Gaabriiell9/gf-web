@@ -8,7 +8,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
-          motion: ['gsap', 'lenis'],
+          motion: ['gsap'],
           supabase: ['@supabase/supabase-js'],
         },
       },

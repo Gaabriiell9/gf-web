@@ -260,8 +260,8 @@ export default function Testimonials() {
 
         {/* ── Header ── */}
         <div className={styles.header}>
+          <p className="kicker">AVIS CLIENTS</p>
           <h2 className={`h2 ${styles.title}`}>Ils m’ont fait confiance</h2>
-          <p className="lead">Des avis laissés par de vrais clients, connectés avec leur compte Google.</p>
         </div>
 
         {/* ── Grid / skeleton / empty ── */}
