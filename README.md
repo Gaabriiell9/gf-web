@@ -5,17 +5,17 @@ Site personnel de Joao Gabriel Farias Gomes Franca, GF Web Micro Entreprise.
 ## Stack
 
 - **React 18** + **Vite** : SPA, pages secondaires chargées à la demande
-- **GSAP** (ScrollTrigger) + **Lenis** : animations au scroll et défilement fluide, désactivés si l'utilisateur préfère réduire les animations
-- **Bricolage Grotesque** auto-hébergée (`@fontsource-variable`), aucune requête vers Google Fonts
+- **GSAP** : rotation du carrousel des réalisations
+- **Plus Jakarta Sans** auto-hébergée (`@fontsource-variable`)
 - **Supabase** : avis clients avec connexion Google
 - **Vercel Serverless Functions** + **Resend** : formulaire de contact (`/api/contact.js`)
 - CSS Modules, aucune librairie UI
 
 ## Où modifier le contenu
 
-- Projets et études de cas : `src/data/projects.js` (champ `image` pour remplacer la maquette dessinée par une vraie capture placée dans `public/projets/`)
-- Services, méthode, tarifs, FAQ, coordonnées : `src/data/site.js`
-- Pages offres, réparation et montage PC : `src/data/offers.js`
+- Projets et études de cas : `src/data/projects.js`
+- Captures des projets (ordinateur, tablette, mobile) : générées par `scripts/screenshots.mjs` via GitHub Actions (onglet Actions, "Captures des projets")
+- Services, montage PC, navigation : `src/data/site.js`
 - Couleurs et typographie : variables en haut de `src/index.css`
 
 ## Installation locale

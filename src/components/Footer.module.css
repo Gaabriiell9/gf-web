@@ -1,43 +1,10 @@
-.footer { position: relative; overflow: hidden; padding-top: clamp(80px, 10vw, 140px); }
-.top {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: 56px 80px;
-}
-.brand { display: inline-flex; font-size: 1.15rem; }
-.brand > span > span:first-child { background: var(--blue); }
-.pitchText { margin-top: 20px; color: var(--on-blue-2); max-width: 34ch; }
-.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
-.colTitle { color: var(--on-blue-2); margin-bottom: 16px; font-size: 0.95rem; }
-.cols ul { list-style: none; display: grid; gap: 10px; }
-.cols a { transition: color 0.3s; }
-.cols a:hover { color: var(--signal); }
-
-.word {
-  margin-top: clamp(64px, 9vw, 120px);
-  font-weight: 800;
-  font-stretch: 75%;
-  font-size: 40vw;
-  line-height: 0.74;
-  letter-spacing: -0.005em;
-  text-align: center;
-  white-space: nowrap;
-  color: var(--cobalt);
-  transform: translateY(0.08em);
-  user-select: none;
-}
-.bottom {
-  position: relative;
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
-  padding-top: 24px; padding-bottom: 28px;
-  font-size: 0.9rem;
-  color: var(--on-blue-2);
-  border-top: 1px solid var(--on-blue-line);
-  background: var(--night);
-}
-@media (max-width: 900px) {
-  .top { grid-template-columns: 1fr; }
-}
-@media (max-width: 560px) {
-  .cols { grid-template-columns: 1fr 1fr; }
-}
+.footer { border-top: 1px solid var(--line); padding-top: 56px; }
+.top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+.text { margin-top: 16px; color: var(--muted); max-width: 36ch; font-size: 0.96rem; }
+.links { list-style: none; display: grid; gap: 10px; font-weight: 600; }
+.links a:hover, .contact a:hover { color: var(--blue); }
+.contact { display: grid; gap: 10px; align-content: start; color: var(--muted); }
+.contact a { color: var(--ink); font-weight: 600; }
+.bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+.bottom a:hover { color: var(--blue); }
+@media (max-width: 760px) { .top { grid-template-columns: 1fr; gap: 28px; } }

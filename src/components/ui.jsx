@@ -36,7 +36,7 @@ export function SmartLink({ to, onClick, children, ...rest }) {
       if (search) navigate(`/${search}#${hash}`, { replace: true })
       else window.history.replaceState(null, '', `/#${hash}`)
       // laisse le temps au menu mobile de se fermer et de déverrouiller le scroll
-      setTimeout(() => scrollToTarget(`#${hash}`, { offset: 0 }), 80)
+      setTimeout(() => scrollToTarget(`#${hash}`), 80)
     }
   }
 

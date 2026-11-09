@@ -115,4 +115,10 @@ export const projects = [
   },
 ]
 
+// Captures : /projets/<nom>.jpg (ordinateur), <nom>-tablette.jpg et <nom>-mobile.jpg
+export const shots = (p) => {
+  const base = p.image.replace(/\.jpg$/, '')
+  return { desktop: p.image, tablet: `${base}-tablette.jpg`, mobile: `${base}-mobile.jpg` }
+}
+
 export const getProject = (slug) => projects.find((p) => p.slug === slug)

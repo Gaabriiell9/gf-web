@@ -1,10 +1,7 @@
-import { useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Back, PageCta } from '../components/PageParts'
-import { SmartLink, ArrowRight } from '../components/ui'
-import { gsap, prefersReducedMotion } from '../lib/motion'
-import { useGsap } from '../hooks/useGsap'
+import { Back, Cta } from '../components/PageParts'
 import { site } from '../data/site'
+import { useReveal } from '../hooks/useReveal'
 import s from './Page.module.css'
 
 const timeline = [
@@ -31,117 +28,68 @@ const companyInfo = [
 ]
 
 export default function About() {
-  const root = useRef(null)
-
-  useGsap(() => {
-    if (prefersReducedMotion()) return
-    const q = gsap.utils.selector(root)
-    gsap.from(q('[data-line]'), { yPercent: 110, duration: 1.3, ease: 'expo.out', stagger: 0.1, delay: 0.1 })
-    gsap.fromTo(q('[data-tline]'), { scaleY: 0 }, {
-      scaleY: 1, ease: 'none',
-      scrollTrigger: { trigger: q('[data-timeline]')[0], start: 'top 70%', end: 'bottom 60%', scrub: 0.5 },
-    })
-  }, root)
-
+  useReveal()
   return (
-    <div ref={root}>
+    <>
       <Helmet>
         <title>À propos · Gabriel Farias, développeur web freelance à Bordeaux | GF Web</title>
-        <meta name="description" content="Développeur web freelance à Bordeaux. Passionné d’informatique, de cybersécurité et de hardware. Parcours, compétences et informations sur GF Web." />
+        <meta name="description" content="Développeur web freelance à Bordeaux. Parcours, compétences et informations sur GF Web." />
         <link rel="canonical" href="https://gf-web.fr/about" />
       </Helmet>
 
       <section className={`wrap ${s.pageHero}`}>
         <Back />
-        <h1 className="h1">
-          <span className="line-mask"><span className="line-inner" data-line>Joao Gabriel</span></span>
-          <span className="line-mask"><span className={`line-inner ${s.titleMuted}`} data-line>Farias Gomes Franca</span></span>
-        </h1>
+        <p className="kicker">À PROPOS</p>
+        <h1 className="h1">Joao Gabriel Farias Gomes Franca</h1>
         <p className={`lead ${s.heroLead}`}>Développeur web et passionné d’informatique, basé à Bordeaux.</p>
-        <ul className={s.pills}>
-          {['21 ans', 'Micro-entrepreneur', 'Développeur web', 'Expert en informatique'].map((p) => <li key={p}>{p}</li>)}
-        </ul>
       </section>
 
-      <section className="section wrap" style={{ paddingTop: 0 }}>
-        <div className={s.split}>
+      <section className="section soft">
+        <div className={`wrap ${s.split} reveal`}>
           <h2 className="h2">Qui je suis</h2>
-          <div className={s.prose}>
-            <p className={s.bigText} style={{ color: 'var(--ink)', marginBottom: '1.2em' }}>
-              Né au Brésil et grandi en France, je suis développeur web freelance basé à Bordeaux.
-              L’informatique est une passion avant d’être un métier.
-            </p>
-            <p>
-              Depuis mes débuts, j’aime comprendre comment les systèmes fonctionnent, les décortiquer et les améliorer.
-              J’ai poursuivi des études en informatique, en explorant aussi bien le développement web que les réseaux
-              et la cybersécurité.
-            </p>
-            <p>
-              Convaincu que le meilleur moyen d’apprendre est de construire, j’ai multiplié les projets concrets :
-              sites clients, applications SaaS, infrastructure auto-hébergée, assemblage de machines.
-            </p>
-            <p>
-              Cette expérience m’a naturellement conduit à créer GF Web, ma micro-entreprise, pour mettre ces
-              compétences au service de clients qui veulent un interlocuteur technique sérieux, disponible et passionné.
-            </p>
+          <div className="lead">
+            <p>Né au Brésil et grandi en France, je suis développeur web freelance basé à Bordeaux. L’informatique est une passion avant d’être un métier.</p>
+            <p style={{ marginTop: '1em' }}>Depuis mes débuts, j’aime comprendre comment les systèmes fonctionnent, les décortiquer et les améliorer. J’ai poursuivi des études en informatique, en explorant aussi bien le développement web que les réseaux et la cybersécurité.</p>
+            <p style={{ marginTop: '1em' }}>Convaincu que le meilleur moyen d’apprendre est de construire, j’ai multiplié les projets concrets, ce qui m’a naturellement conduit à créer GF Web pour mettre ces compétences au service de mes clients.</p>
           </div>
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--paper-2)' }}>
-        <div className="wrap">
-          <div className={s.sectionHead}><h2 className="h2">Mon parcours</h2></div>
-          <ol className={s.timeline} data-timeline>
-            <span className={s.timelineLine} aria-hidden="true"><span data-tline /></span>
+      <section className="section">
+        <div className="wrap reveal">
+          <h2 className="h2">Mon parcours</h2>
+          <ol className={s.timeline}>
             {timeline.map((t) => (
-              <li key={t.year} className={s.tItem}>
-                <p className={s.tYear}>{t.year}</p>
-                <div>
-                  <h3 className={s.tTitle}>{t.title}</h3>
-                  <p className={s.tDesc}>{t.description}</p>
-                </div>
-              </li>
+              <li key={t.year}><span className={s.year}>{t.year}</span><h3 className="h3">{t.title}</h3><p>{t.description}</p></li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="section wrap">
-        <div className={s.sectionHead}><h2 className="h2">Ce qui me passionne</h2></div>
-        <div className={s.cards}>
-          {passions.map((p, i) => (
-            <article key={p.title} className={`${s.card} ${i === 1 ? s.cardBlue : ''}`}>
-              <h3 className={s.cardTitle}>{p.title}</h3>
-              <p className={s.cardDesc}>{p.desc}</p>
-            </article>
-          ))}
+      <section className="section soft">
+        <div className="wrap reveal">
+          <h2 className="h2">Ce qui me passionne</h2>
+          <div className={`${s.cards} ${s.cards3}`}>
+            {passions.map((p) => <div key={p.title} className={s.card}><h3 className="h3">{p.title}</h3><p>{p.desc}</p></div>)}
+          </div>
         </div>
       </section>
 
-      <section className="section wrap" style={{ paddingTop: 0 }}>
-        <div className={s.split}>
+      <section className="section">
+        <div className={`wrap ${s.split} reveal`}>
           <div>
             <h2 className="h2">Mon entreprise</h2>
-            <p className={`lead ${s.heroLead}`}>
-              GF Web est une micro-entreprise de développement web et de conseil en systèmes informatiques,
-              créée à Bègles, Bordeaux. Activité libérale non réglementée, régime BNC, franchise en base de TVA.
-            </p>
-            <div className={s.heroActions}>
-              <SmartLink to="/#realisations" className="btn">Voir mes réalisations <ArrowRight /></SmartLink>
-            </div>
+            <p className={`lead ${s.heroLead}`}>GF Web est une micro-entreprise de développement web et de conseil en informatique, créée à Bègles, près de Bordeaux.</p>
           </div>
           <dl className={s.meta}>
             {companyInfo.map((it) => (
-              <div key={it.label}>
-                <dt>{it.label}</dt>
-                <dd>{it.href ? <a href={it.href} className="tlink">{it.value}</a> : it.value}</dd>
-              </div>
+              <div key={it.label}><dt>{it.label}</dt><dd>{it.href ? <a href={it.href}>{it.value}</a> : it.value}</dd></div>
             ))}
           </dl>
         </div>
       </section>
 
-      <PageCta title="Travaillons ensemble." sub="Un projet, une question, un devis ? Je vous réponds sous 24 h." label="Me contacter" />
-    </div>
+      <Cta title="Travaillons ensemble" />
+    </>
   )
 }

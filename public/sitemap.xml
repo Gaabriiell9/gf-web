@@ -13,24 +13,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gf-web.fr/site-vitrine</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gf-web.fr/application-web</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gf-web.fr/reparation-pc</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://gf-web.fr/montage-pc</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>

@@ -1,20 +1,19 @@
-import { Link } from 'react-router-dom'
-import { SmartLink, ArrowLeft, ArrowRight } from './ui'
+import { SmartLink, ArrowLeft } from './ui'
 import s from '../pages/Page.module.css'
 
 export function Back({ to = '/', children = 'Retour à l’accueil' }) {
   return <SmartLink to={to} className={s.back}><ArrowLeft />{children}</SmartLink>
 }
 
-export function PageCta({ title, sub, subject, label = 'Demander un devis' }) {
+export function Cta({ title = 'Un projet en tête ?', text = 'Décrivez-moi votre besoin, je vous réponds rapidement.', subject }) {
   const to = subject ? `/?sujet=${encodeURIComponent(subject)}#contact` : '/#contact'
   return (
-    <section className={`${s.ctaBand} blueprint on-blue`}>
-      <div className={`wrap ${s.ctaInner}`}>
-        <h2 className={`h2 ${s.ctaTitle}`}>{title}</h2>
-        <div className={s.ctaRow}>
-          <p className="lead">{sub}</p>
-          <Link to={to} className="btn btn-signal">{label} <ArrowRight /></Link>
+    <section className="section">
+      <div className="wrap">
+        <div className={s.cta}>
+          <h2 className="h2">{title}</h2>
+          <p>{text}</p>
+          <SmartLink to={to} className="btn btn-white">Me contacter</SmartLink>
         </div>
       </div>
     </section>

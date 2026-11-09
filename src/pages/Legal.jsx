@@ -25,7 +25,7 @@ const Rows = ({ rows }) => (
     {rows.map((r) => (
       <div key={r.label}>
         <dt>{r.label}</dt>
-        <dd>{r.href ? <a href={r.href} className="tlink" {...(r.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{r.value}</a> : r.value}</dd>
+        <dd>{r.href ? <a href={r.href} {...(r.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{r.value}</a> : r.value}</dd>
       </div>
     ))}
   </dl>
@@ -42,20 +42,18 @@ export default function Legal() {
         <Back />
         <h1 className="h1">Mentions légales</h1>
       </section>
-      <section className={s.legalBlock}><h2>Éditeur du site</h2><Rows rows={editorRows} /></section>
-      <section className={s.legalBlock}><h2>Hébergement</h2><Rows rows={hostRows} /></section>
-      <section className={s.legalBlock}>
-        <h2>Propriété intellectuelle</h2>
-        <div className={s.prose}>
-          <p>Tout le contenu du site (textes, visuels, code) est la propriété de Joao Gabriel Farias Gomes Franca. Reproduction interdite sans autorisation écrite préalable.</p>
-        </div>
+      <section className={s.legal}><h2 className="h3">Éditeur du site</h2><Rows rows={editorRows} /></section>
+      <section className={s.legal}><h2 className="h3">Hébergement</h2><Rows rows={hostRows} /></section>
+      <section className={s.legal}>
+        <h2 className="h3">Propriété intellectuelle</h2>
+        <div><p>Tout le contenu du site (textes, visuels, code) est la propriété de Joao Gabriel Farias Gomes Franca. Reproduction interdite sans autorisation écrite préalable.</p></div>
       </section>
-      <section className={s.legalBlock}>
-        <h2>Données personnelles</h2>
-        <div className={s.prose}>
+      <section className={s.legal}>
+        <h2 className="h3">Données personnelles</h2>
+        <div>
           <p>Les données collectées via le formulaire de contact (nom, email, message) sont utilisées uniquement pour répondre aux demandes. Elles ne sont ni vendues ni transmises à des tiers.</p>
           <p>Les avis clients sont publiés après connexion avec un compte Google : seuls le nom, la photo de profil, l’activité indiquée, la note et le message sont enregistrés.</p>
-          <p>Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression en contactant : <a href="mailto:joaofarias20@icloud.com" className="tlink">joaofarias20@icloud.com</a></p>
+          <p>Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression en contactant : <a href="mailto:joaofarias20@icloud.com">joaofarias20@icloud.com</a></p>
         </div>
       </section>
     </div>
